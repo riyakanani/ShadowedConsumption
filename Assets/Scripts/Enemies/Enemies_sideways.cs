@@ -6,7 +6,7 @@ public class Enemies_sideways : MonoBehaviour
 {
     [SerializeField] private float movementDistance;
     [SerializeField] private float speed;
-    [SerializeField] private float damage;
+    [SerializeField] private float damage = 20f;
     private bool movingLeft;
     private float leftEdge;
     private float rightEdge;
@@ -35,7 +35,7 @@ public class Enemies_sideways : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision){
         if(collision.tag == "Player"){
-            collision.GetComponent<Health>().TakeDamage(damage ); 
+            collision.GetComponent<Health>().TakeDamage(damage); 
         }
     }
      

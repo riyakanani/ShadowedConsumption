@@ -24,13 +24,17 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         horizontalInput = Input.GetAxis("Horizontal");
         
         //flips player when moving left/right
         if(horizontalInput > 0.01f){
-            transform.localScale = Vector3.one;
+            // transform.localScale = Vector3.one;
+            transform.localScale = new Vector3(1,.1888354f, 1);
+            
         } else if(horizontalInput < -0.01f){
-            transform.localScale = new Vector3(-1, 1, 1);
+            // transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-1, .1888354f, 1);
         }
 
         //Set animator param
