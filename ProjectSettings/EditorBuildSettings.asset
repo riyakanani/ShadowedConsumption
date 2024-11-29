@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Levels/Intro Play.unity
     guid: 2c09c9a7465d542ce9278c8736132be1
   - enabled: 1
+    path: Assets/Levels/FirstNarrative.unity
+    guid: ca17829c974f84b4abe5a4f3abcbc019
+  - enabled: 1
     path: Assets/Levels/Level1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

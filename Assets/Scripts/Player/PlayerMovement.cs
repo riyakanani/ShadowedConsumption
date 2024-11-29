@@ -8,6 +8,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpPower;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
+    //for dialogue
+    [SerializeField] private GameObject Circle;
+    [SerializeField] private GameObject X;
+    private NPC_Controller npc;
+
     private Rigidbody2D body;
     private Animator anim;
     private BoxCollider2D boxCollider; 
@@ -24,39 +29,41 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        horizontalInput = Input.GetAxis("Horizontal");
-        
-        //flips player when moving left/right
-        if(horizontalInput > 0.01f){
-            // transform.localScale = Vector3.one;
-            transform.localScale = new Vector3(1,.1888354f, 1);
+        if(!inDialogue()){
             
-        } else if(horizontalInput < -0.01f){
-            // transform.localScale = new Vector3(-1, 1, 1);
-            transform.localScale = new Vector3(-1, .1888354f, 1);
-        }
+            horizontalInput = Input.GetAxis("Horizontal");
+            //flips player when moving left/right
+            if(horizontalInput > 0.01f){
+                // transform.localScale = Vector3.one;
+                transform.localScale = new Vector3(1,.1888354f, 1);
+                
+            } else if(horizontalInput < -0.01f){
+                // transform.localScale = new Vector3(-1, 1, 1);
+                transform.localScale = new Vector3(-1, .1888354f, 1);
+            }
 
-        //Set animator param
-        anim.SetBool("run", horizontalInput != 0);
-        anim.SetBool("grounded", isGrounded());
+            //Set animator param
+            anim.SetBool("run", horizontalInput != 0);
+            anim.SetBool("grounded", isGrounded());
 
-        //Wall Jump
-        if(wallJumpCooldown > 0.2f){
-            
-            body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
-            if(onWall() && !isGrounded()){
-                body.gravityScale = 0;
-                body.velocity = Vector2.zero;
+            //Wall Jump
+            if(wallJumpCooldown > 0.2f){
+                
+                body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
+                if(onWall() && !isGrounded()){
+                    body.gravityScale = 0;
+                    body.velocity = Vector2.zero;
+                } else {
+                    body.gravityScale = 5;
+                }
+
+                if(Input.GetKey(KeyCode.Space)){
+                    Jump();
+                }
             } else {
-                body.gravityScale = 5;
+                wallJumpCooldown += Time.deltaTime;
             }
 
-            if(Input.GetKey(KeyCode.Space)){
-                Jump();
-            }
-        } else {
-            wallJumpCooldown += Time.deltaTime;
         }
     }
 
@@ -76,10 +83,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision){
-        
-    }
-
     private bool isGrounded(){
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
         return raycastHit.collider != null;
@@ -88,6 +91,30 @@ public class PlayerMovement : MonoBehaviour
     private bool onWall(){
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
         return raycastHit.collider != null;
+    }
+
+    private bool inDialogue(){
+        if(npc != null){
+            return npc.DialogueActive();
+        } else {
+            return false;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision){
+        if(collision.gameObject.tag == "NPC"){
+            Circle.gameObject.SetActive(true);
+            X.gameObject.SetActive(true);
+
+            npc = collision.gameObject.GetComponent<NPC_Controller>();
+            if(Input.GetKey(KeyCode.X)){
+                npc.ActiveDialogue();
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision){
+        npc = null;
     }
 }
  

@@ -975,7 +975,7 @@ GameObject:
   - component: {fileID: 1608779075}
   - component: {fileID: 1608779074}
   - component: {fileID: 1608779079}
-  - component: {fileID: 1608779077}
+  - component: {fileID: 1608779080}
   - component: {fileID: 1608779078}
   m_Layer: 5
   m_Name: Button
@@ -1048,9 +1048,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1608779077}
-        m_TargetAssemblyTypeName: PressPlay, Assembly-CSharp
-        m_MethodName: GoToSceneTwo
+      - m_Target: {fileID: 1608779080}
+        m_TargetAssemblyTypeName: SceneSwitch, Assembly-CSharp
+        m_MethodName: playGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1098,18 +1098,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608779072}
   m_CullTransparentMesh: 1
---- !u!114 &1608779077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1608779072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7157e73adfce84b5bab5aba04d48dbb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1608779078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1165,6 +1153,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdbbd9e5b7ef042ae997acd99abf5659, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1608779080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608779072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a773ea0dd7f0d45e19b5275071c53f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1683317361
