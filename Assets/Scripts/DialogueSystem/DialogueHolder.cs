@@ -18,9 +18,11 @@ namespace DialogueSystem {
         }
 
         private void Update() {
-            if(Input.GetKey(KeyCode.Escape)){
+            if(Input.GetKey(KeyCode.E)){
                 Deactivate();
                 gameObject.SetActive(false);
+                Circle.SetActive(false);
+                X.SetActive(false);
                 StopCoroutine(dialogueSeq);
             }
         }
@@ -32,10 +34,9 @@ namespace DialogueSystem {
                 transform.GetChild(i).gameObject.SetActive(true);
                 yield return new WaitUntil(() => transform.GetChild(i).GetComponent<DialogueLine>().finished);
             }
-            
-            gameObject.SetActive(false);
             Circle.SetActive(false);
             X.SetActive(false);
+            gameObject.SetActive(false);
         }
 
         //sets other lines to inactive
