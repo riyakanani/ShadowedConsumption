@@ -5,6 +5,7 @@ using UnityEngine;
 public class NPC_Controller : MonoBehaviour
 {
     [SerializeField] private GameObject dialogue;
+    [SerializeField] private GameObject X;
     public void ActiveDialogue(){
         dialogue.SetActive(true);
     }
