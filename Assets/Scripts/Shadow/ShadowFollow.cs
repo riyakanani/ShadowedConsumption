@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ShadowFollow : MonoBehaviour
@@ -86,9 +87,44 @@ public class ShadowFollow : MonoBehaviour
         shadowAnimator.Play(playerStateInfo.fullPathHash, 0, playerStateInfo.normalizedTime);
     }
 
-    public void GrowShadow(float scaleMultiplier)
+    public void GrowShadow(float scaleMultiplier, float anticipationFactor = 0.6f, float duration = 1.0f)
     {
-        // Scale the shadow by the multiplier
-        transform.localScale *= scaleMultiplier;
+        StartCoroutine(GrowShadowWithAnticipation(scaleMultiplier, anticipationFactor, duration));
     }
+
+    private IEnumerator GrowShadowWithAnticipation(float scaleMultiplier, float anticipationFactor, float duration)
+    {
+        Vector3 originalScale = transform.localScale;
+        Vector3 shrunkScale = originalScale * anticipationFactor;
+        Vector3 targetScale = originalScale * scaleMultiplier;
+
+        float shrinkDuration = duration * 0.4f;
+        float growDuration = duration * 0.6f; 
+
+        float elapsed = 0f;
+
+        // Shrink phase 
+        while (elapsed < shrinkDuration)
+        {
+            float t = elapsed / shrinkDuration;
+            t = Mathf.SmoothStep(0f, 1f, t);
+            transform.localScale = Vector3.Lerp(originalScale, shrunkScale, t);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        transform.localScale = shrunkScale;
+
+        // Grow phase
+        elapsed = 0f;
+        while (elapsed < growDuration)
+        {
+            float t = elapsed / growDuration;
+            t = Mathf.SmoothStep(0f, 1f, t);
+            transform.localScale = Vector3.Lerp(shrunkScale, targetScale, t);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        transform.localScale = targetScale;
+    }
+
 }
