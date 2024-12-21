@@ -450,8 +450,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.8
-  MaxDistance: 7.9840827
+  MinDistance: 1.8605447
+  MaxDistance: 7.330002
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -1125,8 +1125,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.8
-  MaxDistance: 7.723475
+  MinDistance: 2.0382938
+  MaxDistance: 7.66179
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -1641,7 +1641,6 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
-  - component: {fileID: 519420029}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
   m_Layer: 0
@@ -1651,14 +1650,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &519420029
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -17352,8 +17343,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.8
-  MaxDistance: 9.026514
+  MinDistance: 1.3994141
+  MaxDistance: 8.2120495
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -17618,8 +17609,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.8000002
-  MaxDistance: 8.179539
+  MinDistance: 1.4768186
+  MaxDistance: 7.6665177
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -30232,6 +30223,7 @@ GameObject:
   - component: {fileID: 1815917376}
   - component: {fileID: 1815917377}
   - component: {fileID: 1815917378}
+  - component: {fileID: 1815917379}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -30434,6 +30426,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 4
+--- !u!81 &1815917379
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815917371}
+  m_Enabled: 1
 --- !u!1 &1847715214
 GameObject:
   m_ObjectHideFlags: 0
