@@ -71,8 +71,6 @@ public class Enemies_sideways : MonoBehaviour
             if (animator.GetBool("PlayerClose")) // Only update if there's a change
             {
                 animator.SetBool("PlayerClose", false);
-                Debug.Log("PlayerClose: " + animator.GetBool("PlayerClose"));
-
             }
         }
     }

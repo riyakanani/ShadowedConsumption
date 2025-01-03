@@ -24,7 +24,7 @@ public class Health : MonoBehaviour
                 anim.SetTrigger("die");
                 GetComponent<PlayerMovement>().enabled = false;
                 dead = true;
-                SceneManager.LoadScene("Level1");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
            
         }

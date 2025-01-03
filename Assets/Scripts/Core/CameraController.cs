@@ -26,6 +26,7 @@ public class CameraController : MonoBehaviour
 
     public void MoveToNewRoomX(Transform _newRoom){
         currentPosX = _newRoom.position.x; 
+        Debug.Log("HEre");
     }
     public void MoveToNewRoomY(Transform _newRoom){
         currentPosY = _newRoom.position.y; 

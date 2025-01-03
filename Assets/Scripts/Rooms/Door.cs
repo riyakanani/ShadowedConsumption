@@ -21,19 +21,6 @@ public class Door : MonoBehaviour
             {
                 cam.MoveToNewRoomX(previousRoom);
             }
-
-            // Additional logic for Room3 to handle Y-axis movement
-            if (nextRoom.name == "Room3")
-            {
-                if (collision.transform.position.y < transform.position.y)
-                {
-                    cam.MoveToNewRoomY(nextRoom);
-                }
-                else
-                {
-                    cam.MoveToNewRoomY(previousRoom);
-                }
-            }
         }
     }
 }

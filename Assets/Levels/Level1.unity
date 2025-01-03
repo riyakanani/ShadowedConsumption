@@ -177,7 +177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 160630361}
   - component: {fileID: 160630363}
-  - component: {fileID: 160630362}
+  - component: {fileID: 160630364}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -200,21 +200,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1094414811}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &160630362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 160630360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0205600eeb4334a3ea1e8393dff29b49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  previousRoom: {fileID: 1731314002}
-  nextRoom: {fileID: 1094414811}
-  cam: {fileID: 519420033}
 --- !u!61 &160630363
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -260,6 +245,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.5487957, y: 4.121992}
   m_EdgeRadius: 0
+--- !u!114 &160630364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160630360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a773ea0dd7f0d45e19b5275071c53f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &182706183
 GameObject:
   m_ObjectHideFlags: 0
