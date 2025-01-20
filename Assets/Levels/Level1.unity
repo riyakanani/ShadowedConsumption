@@ -293,7 +293,7 @@ MonoBehaviour:
   movementDistance: 3
   speed: 5
   damage: 1
-  detectionRange: 15
+  detectionRange: 10
 --- !u!95 &182706185
 Animator:
   serializedVersion: 5
@@ -969,7 +969,7 @@ MonoBehaviour:
   movementDistance: 3
   speed: 5
   damage: 1
-  detectionRange: 15
+  detectionRange: 10
 --- !u!95 &268333769
 Animator:
   serializedVersion: 5
@@ -17193,7 +17193,7 @@ MonoBehaviour:
   movementDistance: 3
   speed: 5
   damage: 1
-  detectionRange: 15
+  detectionRange: 10
 --- !u!95 &894739012
 Animator:
   serializedVersion: 5
@@ -17460,7 +17460,7 @@ MonoBehaviour:
   movementDistance: 3
   speed: 5
   damage: 1
-  detectionRange: 15
+  detectionRange: 10
 --- !u!95 &906746913
 Animator:
   serializedVersion: 5
@@ -17953,7 +17953,7 @@ Transform:
   m_GameObject: {fileID: 1000285062}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 33.390015, y: 16.190002, z: 0}
+  m_LocalPosition: {x: 33.390015, y: 20.68, z: 0}
   m_LocalScale: {x: 0.33589, y: 0.53464997, z: 0.20098998}
   m_ConstrainProportionsScale: 0
   m_Children:

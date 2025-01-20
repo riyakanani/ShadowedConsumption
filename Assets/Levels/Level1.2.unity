@@ -22833,7 +22833,7 @@ MonoBehaviour:
   movementDistance: 3
   speed: 5
   damage: 1
-  detectionRange: 15
+  detectionRange: 10
 --- !u!95 &1291744725
 Animator:
   serializedVersion: 5
@@ -23796,7 +23796,7 @@ MonoBehaviour:
   movementDistance: 3
   speed: 5
   damage: 1
-  detectionRange: 15
+  detectionRange: 10
 --- !u!95 &1561563944
 Animator:
   serializedVersion: 5
@@ -24372,7 +24372,7 @@ MonoBehaviour:
   movementDistance: 3
   speed: 5
   damage: 1
-  detectionRange: 15
+  detectionRange: 10
 --- !u!95 &1698042910
 Animator:
   serializedVersion: 5
@@ -24947,7 +24947,7 @@ MonoBehaviour:
   movementDistance: 3
   speed: 5
   damage: 1
-  detectionRange: 15
+  detectionRange: 10
 --- !u!95 &1834679090
 Animator:
   serializedVersion: 5

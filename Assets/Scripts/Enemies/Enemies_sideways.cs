@@ -7,7 +7,7 @@ public class Enemies_sideways : MonoBehaviour
     [SerializeField] private float movementDistance;
     [SerializeField] private float speed;
     [SerializeField] private float damage = 20f;
-    [SerializeField] private float detectionRange = 15f; // Distance to detect the player
+    [SerializeField] private float detectionRange = 10f; // Distance to detect the player
     private bool movingLeft;
     private float leftEdge;
     private float rightEdge;
