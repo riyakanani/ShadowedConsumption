@@ -1728,6 +1728,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a2ad10ca11874436ab5b664e96cbf07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1815917371}
+  xMin: -5
+  xMax: 30
+  yMin: 0
+  yMax: 0
   speed: 1
 --- !u!114 &519420034
 MonoBehaviour:
@@ -18269,7 +18274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1183453341
 Transform:
   m_ObjectHideFlags: 0
