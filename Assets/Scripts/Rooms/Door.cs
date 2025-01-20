@@ -12,51 +12,18 @@ public class Door : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            Debug.Log("player triggered door");
             // Handle X-axis movement
             if (collision.transform.position.x < transform.position.x)
             {
+                Debug.Log("move next room");
                 cam.MoveToNewRoomX(nextRoom);
             }
             else
             {
+                Debug.Log("move prev room");
                 cam.MoveToNewRoomX(previousRoom);
             }
         }
     }
 }
-
-
-// using System.Collections;
-// using System.Collections.Generic;
-// using UnityEngine;
-
-// public class Door : MonoBehaviour
-// {
-//     [SerializeField] private Transform previousRoom;
-//     [SerializeField] private Transform nextRoom;
-//     [SerializeField] private CameraController cam;
-    
-//     private void OnTriggerEnter2D(Collider2D collision){
-//         if(collision.tag == "Player"){
-//             if(collision.transform.position.x < transform.position.x){
-//                 cam.MoveToNewRoom(nextRoom);
-//             } else {
-//                 cam.MoveToNewRoom(previousRoom);
-//             } 
-
-//             if(nextRoom.name == "Room3"){
-//                 if(collision.transform.position.y < transform.position.y){
-//                     cam.MoveToNewRoomX(nextRoom);
-//                 } else {
-//                     cam.MoveToNewRoomY(previousRoom);
-//                 } 
-//             }
-//             // if(collision.transform.position.y < transform.position.y){
-//             //     cam.MoveToNewRoom(nextRoom);
-//             // } else {
-//             //     cam.MoveToNewRoom(previousRoom);
-//             // } 
-
-//         }
-//     }
-// }
