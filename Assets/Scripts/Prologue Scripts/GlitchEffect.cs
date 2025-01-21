@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class GlitchEffect : MonoBehaviour
 {
     public UnityEngine.Rendering.Universal.Light2D spotlight; // Reference to the 2D spotlight
@@ -11,6 +10,10 @@ public class GlitchEffect : MonoBehaviour
     public Animator eyeAnimator; // Animator for the glowing eyes
     public GameObject girlCharacter; // Reference to the girl character
     public GameObject shadowNextToGirl; // Reference to the shadow that appears next to the girl
+    public GameObject openBook; // Reference to the open book object
+    public GameObject closedBook; // Reference to the closed book object
+    public Animator handAnimator; // Animator for the girl's hand
+
     public GameObject[] sceneObjects; // All objects to disable during the glitch
     public AudioSource[] sceneAudioSources; // Audio sources to stop during the glitch
 
@@ -55,32 +58,33 @@ public class GlitchEffect : MonoBehaviour
         // Ensure spotlight, shadow monster, and shadow next to girl are off at start
         if (spotlight != null)
         {
-            Debug.Log("Spotlight reference is valid.");
-            spotlight.gameObject.SetActive(false); // Initially disable GameObject
-        }
-        else
-        {
-            Debug.LogError("Spotlight reference is null!");
+            spotlight.gameObject.SetActive(false);
         }
 
         if (shadowMonster != null)
         {
-            shadowMonster.SetActive(false); // Disable shadow monster at the start
+            shadowMonster.SetActive(false);
         }
 
         if (shadowNextToGirl != null)
         {
-            shadowNextToGirl.SetActive(false); // Disable shadow next to girl at the start
+            shadowNextToGirl.SetActive(false);
         }
 
         if (shadowAnimator != null)
         {
-            shadowAnimator.enabled = false; // Disable shadow animations at the start
+            shadowAnimator.enabled = false;
         }
 
         if (eyeAnimator != null)
         {
-            eyeAnimator.enabled = false; // Disable eye animations at the start
+            eyeAnimator.enabled = false;
+        }
+
+        // Initially disable the closed book
+        if (closedBook != null)
+        {
+            closedBook.SetActive(false);
         }
 
         // Automatically start glitch after initial delay
@@ -91,7 +95,7 @@ public class GlitchEffect : MonoBehaviour
     {
         Debug.Log($"Waiting for {initialDelay} seconds before triggering glitch...");
         yield return new WaitForSeconds(initialDelay);
-        TriggerGlitch(); // Trigger the glitch sequence
+        TriggerGlitch();
     }
 
     public void TriggerGlitch()
@@ -106,63 +110,49 @@ public class GlitchEffect : MonoBehaviour
     {
         Debug.Log("Starting glitch sequence...");
 
-        // Immediately disable the girl character and enable the shadow monster
         if (girlCharacter != null)
         {
-            Debug.Log("Disabling girl character...");
-            girlCharacter.SetActive(false); // Girl disappears immediately
+            girlCharacter.SetActive(false);
         }
 
         if (shadowMonster != null)
         {
-            Debug.Log("Enabling shadow monster...");
-            shadowMonster.SetActive(true); // Shadow appears immediately
+            shadowMonster.SetActive(true);
         }
 
-        // Wait for the glitch delay
         yield return new WaitForSeconds(glitchDelay);
-        Debug.Log("Glitch delay elapsed.");
 
-        // Disable animations and sounds
         foreach (GameObject obj in sceneObjects)
         {
             if (obj.TryGetComponent<Animator>(out Animator animator))
             {
                 animator.enabled = false;
-                Debug.Log($"Disabled animator on {obj.name}");
             }
         }
 
         foreach (AudioSource audioSource in sceneAudioSources)
         {
             audioSource.Stop();
-            Debug.Log($"Stopped audio source on {audioSource.gameObject.name}");
         }
 
-        // Enable spotlight GameObject before flickering
         if (spotlight != null)
         {
-            Debug.Log("Enabling spotlight GameObject...");
-            spotlight.gameObject.SetActive(true); // Activate the GameObject
-            yield return StartCoroutine(FlickerLight()); // Perform flickering
+            spotlight.gameObject.SetActive(true);
+            yield return StartCoroutine(FlickerLight());
         }
 
-        // After spotlight flickering, enable animations for shadow and eyes
         if (shadowAnimator != null)
         {
-            Debug.Log("Enabling shadow animations...");
-            shadowAnimator.enabled = true; // Start shadow animations
+            shadowAnimator.enabled = true;
         }
 
         if (eyeAnimator != null)
         {
-            Debug.Log("Enabling eye animations...");
-            eyeAnimator.enabled = true; // Start eye animations
+            eyeAnimator.enabled = true;
         }
 
         Debug.Log("Glitch sequence completed.");
 
-        // Wait for reset delay, then reset the scene
         yield return new WaitForSeconds(resetDelay);
         ResetScene();
     }
@@ -175,8 +165,7 @@ public class GlitchEffect : MonoBehaviour
         {
             if (spotlight != null)
             {
-                spotlight.enabled = !spotlight.enabled; // Toggle the light
-                Debug.Log($"Spotlight flicker: {spotlight.enabled}");
+                spotlight.enabled = !spotlight.enabled;
             }
 
             yield return new WaitForSeconds(flickerInterval);
@@ -185,8 +174,7 @@ public class GlitchEffect : MonoBehaviour
 
         if (spotlight != null)
         {
-            spotlight.enabled = true; // Ensure the light stays on afterward
-            Debug.Log("Flicker complete. Spotlight enabled.");
+            spotlight.enabled = true;
         }
     }
 
@@ -194,13 +182,11 @@ public class GlitchEffect : MonoBehaviour
     {
         Debug.Log("Resetting scene to original state...");
 
-        // Disable the shadow monster
         if (shadowMonster != null)
         {
             shadowMonster.SetActive(false);
         }
 
-        // Re-enable the girl character
         if (girlCharacter != null)
         {
             girlCharacter.SetActive(true);
@@ -208,20 +194,16 @@ public class GlitchEffect : MonoBehaviour
             girlCharacter.transform.rotation = girlOriginalRotation;
         }
 
-        // Re-enable the shadow next to the girl
         if (shadowNextToGirl != null)
         {
-            shadowNextToGirl.SetActive(true); // Simply make the shadow visible
-            Debug.Log("Shadow next to girl enabled.");
+            shadowNextToGirl.SetActive(true);
         }
 
-        // Restore animations and sounds
         foreach (var entry in originalAnimatorStates)
         {
             if (entry.Key.TryGetComponent<Animator>(out Animator animator))
             {
                 animator.enabled = entry.Value;
-                Debug.Log($"Restored animator on {entry.Key.name} to {entry.Value}");
             }
         }
 
@@ -232,17 +214,34 @@ public class GlitchEffect : MonoBehaviour
                 if (entry.Value)
                 {
                     audioSource.Play();
-                    Debug.Log($"Restarted audio source on {entry.Key.name}");
                 }
             }
         }
 
-        // Disable spotlight
         if (spotlight != null)
         {
             spotlight.gameObject.SetActive(false);
         }
 
-        Debug.Log("Scene reset complete.");
+        StartCoroutine(TriggerHandAndBookAnimation());
+    }
+
+    private IEnumerator TriggerHandAndBookAnimation()
+    {
+        yield return new WaitForSeconds(5f); // Wait for 5 seconds
+
+        if (handAnimator != null)
+        {
+            Debug.Log("Starting hand animation...");
+            handAnimator.SetTrigger("StartHandAnimation"); // Trigger the hand animation
+        }
+
+        // Switch the book from open to closed
+        if (openBook != null && closedBook != null)
+        {
+            Debug.Log("Switching book from open to closed...");
+            openBook.SetActive(false);
+            closedBook.SetActive(true);
+        }
     }
 }
