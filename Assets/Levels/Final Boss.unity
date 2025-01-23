@@ -133,13 +133,13 @@ GameObject:
   m_Component:
   - component: {fileID: 10597726}
   - component: {fileID: 10597733}
-  - component: {fileID: 10597732}
   - component: {fileID: 10597731}
   - component: {fileID: 10597730}
   - component: {fileID: 10597729}
+  - component: {fileID: 10597734}
   m_Layer: 0
   m_Name: Shadow
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,6 +158,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 497503306}
+  - {fileID: 1859408814}
   m_Father: {fileID: 90115031}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &10597729
@@ -239,20 +240,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &10597732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 10597725}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f933528c38b4a484ea2a40e4563d6f33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1744213546}
-  offset: {x: -0.2, y: -0.1, z: 0}
 --- !u!212 &10597733
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -305,6 +292,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &10597734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10597725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef9503d062a7f42b6b174a2ebce3cc2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 2259357095023485256, guid: 8f88436865feb42a68383041f6ef852a, type: 3}
+  bulletPos: {fileID: 1859408814}
 --- !u!1 &12231146
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,6 +648,7 @@ GameObject:
   - component: {fileID: 90115030}
   - component: {fileID: 90115032}
   - component: {fileID: 90115034}
+  - component: {fileID: 90115035}
   m_Layer: 0
   m_Name: Enemy (Code)
   m_TagString: Untagged
@@ -776,6 +778,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &90115035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90115029}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef9503d062a7f42b6b174a2ebce3cc2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 2259357095023485256, guid: 8f88436865feb42a68383041f6ef852a, type: 3}
+  bulletPos: {fileID: 1859408814}
 --- !u!1 &151506980
 GameObject:
   m_ObjectHideFlags: 0
@@ -31036,6 +31052,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1859408813
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1859408814}
+  m_Layer: 0
+  m_Name: ProjectilePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1859408814
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859408813}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 10597726}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1928795226
 GameObject:
   m_ObjectHideFlags: 0
