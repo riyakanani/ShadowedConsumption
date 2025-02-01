@@ -34,6 +34,13 @@ public class GlitchEffect : MonoBehaviour
     {
         Debug.Log("GlitchEffect script is active.");
 
+        // Reset the hand animation trigger at the start
+        if (handAnimator != null)
+        {
+            handAnimator.ResetTrigger("StartHandAnimation");
+            Debug.Log("Reset hand animation trigger at start.");
+        }
+
         // Save initial states of the girl character
         if (girlCharacter != null)
         {
@@ -228,20 +235,31 @@ public class GlitchEffect : MonoBehaviour
 
     private IEnumerator TriggerHandAndBookAnimation()
     {
-        yield return new WaitForSeconds(5f); // Wait for 5 seconds
-
-        if (handAnimator != null)
-        {
-            Debug.Log("Starting hand animation...");
-            handAnimator.SetTrigger("StartHandAnimation"); // Trigger the hand animation
-        }
-
-        // Switch the book from open to closed
+        // Close the book and immediately trigger the hand animation
         if (openBook != null && closedBook != null)
         {
             Debug.Log("Switching book from open to closed...");
             openBook.SetActive(false);
-            closedBook.SetActive(true);
+            closedBook.SetActive(true); // Show the closed book
+        }
+
+        // Trigger the hand animation to move the book down
+        if (handAnimator != null)
+        {
+            Debug.Log("Starting hand animation...");
+            handAnimator.SetTrigger("StartHandAnimation"); // Play the hand animation
+        }
+
+        // Wait for the hand animation to finish
+        yield return new WaitForSeconds(1f); // Adjust this to match the animation length
+
+        // Optional: Disable the Animator to lock the hand in the final position
+        if (handAnimator != null)
+        {
+            handAnimator.enabled = false; // Lock the hand in place
+            Debug.Log("Hand animation completed, animator disabled.");
         }
     }
+
+
 }
