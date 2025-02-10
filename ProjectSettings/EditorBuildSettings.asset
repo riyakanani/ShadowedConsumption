@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/Level1.2.unity
     guid: 3ab64e391aab14a0a8de6727783db3b5
+  - enabled: 1
+    path: Assets/Levels/NeighborhoodScene.unity
+    guid: caf1ec70846d74df58bff75f65623fd2
   m_configObjects: {}
