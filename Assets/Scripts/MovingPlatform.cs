@@ -2,34 +2,65 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    private Vector2 moveDirection; // Direction the shelf moves at first
-    private float moveSpeed; // Speed of movement
-    private float shrinkSpeed; // Speed of shrinking
+    public int pathIndex; 
+    private Vector3 targetPosition; // Where the shelf should move
+    private Vector3 targetScale; // The final scale of the shelf
+    private float moveSpeed = 2f; // Speed of movement
+    private float scaleSpeed = 0.5f; // Speed of resizing
     private bool startMoving = false;
-    private Vector3 minScale; // Minimum size it can shrink to
-    private float moveDuration; // How long the shelf moves outward before stopping
-    private float moveTimer = 0f;
-    private bool oscillating = false; // Whether the shelf should now oscillate
-    private Vector3 startPosition; // Store the stopping position
-    private float oscillationSpeed; // Speed of floating motion
-    private float oscillationAmount; // How much it moves up/down or side to side
+    private bool oscillating = false; 
+    private Vector3 startPosition; 
+    private BoxCollider2D boxCollider; 
 
     private void Start()
     {
-        // Set different randomized values for each shelf
-        moveSpeed = Random.Range(1f, 2.5f); // Slightly lowered move speed
-        shrinkSpeed = Random.Range(0.05f, 0.1f); // Slightly slower shrink
-        moveDuration = Random.Range(2f, 3.5f); // Different move times
+        boxCollider = GetComponent<BoxCollider2D>(); 
 
-        // Prevent the first shelves from moving too high by limiting the random direction
-        float randomX = Random.Range(-1f, 1f);
-        float randomY = Random.Range(-0.5f, 1f); // Now max 1 instead of 1.5 to prevent too much upward movement
-        moveDirection = new Vector2(randomX, randomY).normalized;
+        // **Manually**
+        Vector3[] pathPositions = new Vector3[]
+        {
+            new Vector3(-26.2227f, -6.9393f, 0),
+            new Vector3(-3.9604f, 2.6653f, 0),
+            new Vector3(-20.86f, 0.05f, 0),
+            new Vector3(26.5f, -5.7f, 0),
+            new Vector3(34f, -1.5f, 0),
+            new Vector3(5.8f, 0.3f, 0),
+            new Vector3(17.2f, -1.3f, 0),
+            new Vector3(-27.54f, 5.77f, 0),
+            new Vector3(42.1053f, 4.1574f, 0),
+            new Vector3(-14.21f, 6.08f, 0)
+        };
 
-        minScale = transform.localScale * 0.7f; // Stops shrinking at 70% of original size
+        Vector3[] pathScales = new Vector3[]
+        {
+            new Vector3(0.2245258f, 0.4361229f, 1),
+            new Vector3(0.2348575f, 0.4323424f, 1),
+            new Vector3(0.221791f, 0.4367399f, 1),
+            new Vector3(0.2862278f, 0.5061463f, 1),
+            new Vector3(0.2559863f, 0.4078633f, 1),
+            new Vector3(0.2862278f, 0.5212442f, 1),
+            new Vector3(0.2635544f, 0.4758772f, 1),
+            new Vector3(0.2419354f, 0.4099988f, 1),
+            new Vector3(0.2873277f, 0.5347999f, 1),
+            new Vector3(0.2419354f, 0.4056035f, 1)
+        };
 
-        oscillationSpeed = Random.Range(0.5f, 1.2f); // Different float speeds
-        oscillationAmount = Random.Range(0.1f, 0.2f); // Controlled float range
+        if (pathIndex >= 0 && pathIndex < pathPositions.Length)
+        {
+            targetPosition = pathPositions[pathIndex];
+            targetScale = pathScales[pathIndex];
+
+            if (boxCollider != null)
+            {
+                boxCollider.size = new Vector2(targetScale.x, targetScale.y);
+                boxCollider.offset = Vector2.zero; 
+            }
+        }
+        else
+        {
+            targetPosition = transform.position; // Default if index is out of range
+            targetScale = transform.localScale;
+        }
     }
 
     private void Update()
@@ -38,29 +69,32 @@ public class MovingPlatform : MonoBehaviour
         {
             if (!oscillating)
             {
-                // Move outward but within a constrained range
-                transform.position += (Vector3)moveDirection * moveSpeed * Time.deltaTime;
-                moveTimer += Time.deltaTime;
+                // Move shelf toward its designated position
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
-                // Shrink slightly but stop shrinking at minScale
-                if (transform.localScale.x > minScale.x && transform.localScale.y > minScale.y)
+                // Scale the shelf toward its target size
+                transform.localScale = Vector3.Lerp(transform.localScale, targetScale, scaleSpeed * Time.deltaTime);
+
+                // **Ensure the collider keeps matching the shelf size**
+                if (boxCollider != null)
                 {
-                    transform.localScale -= Vector3.one * shrinkSpeed * Time.deltaTime;
+                    boxCollider.size = new Vector2(targetScale.x, targetScale.y);
+                    boxCollider.offset = Vector2.zero;
                 }
 
-                // Stop movement after moveDuration and start oscillating
-                if (moveTimer >= moveDuration)
+                // If the shelf reaches the target position, start floating motion
+                if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
                 {
-                    startPosition = transform.position; // Store stopping position
-                    oscillating = true; // Switch to oscillation phase
+                    startPosition = transform.position;
+                    oscillating = true;
                 }
             }
             else
             {
-                // Slight floating movement to maintain platforming
+                // Gentle floating movement for platforming challenge
                 transform.position = startPosition + new Vector3(
-                    Mathf.Sin(Time.time * oscillationSpeed) * oscillationAmount, // Side to side movement
-                    Mathf.Cos(Time.time * oscillationSpeed) * oscillationAmount, // Up and down movement
+                    Mathf.Sin(Time.time * 1.2f) * 0.15f, // Side to side movement
+                    Mathf.Cos(Time.time * 1.2f) * 0.15f, // Up and down movement
                     0);
             }
         }
@@ -68,7 +102,7 @@ public class MovingPlatform : MonoBehaviour
 
     public void StartMoving()
     {
-        Debug.Log("🚀 Shelf started moving: " + gameObject.name + " Direction: " + moveDirection);
+        Debug.Log("🚀 Shelf " + pathIndex + " started moving to position " + targetPosition);
         startMoving = true;
     }
 }
