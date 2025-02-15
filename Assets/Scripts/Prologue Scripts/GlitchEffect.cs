@@ -14,6 +14,9 @@ public class GlitchEffect : MonoBehaviour
     public GameObject closedBook; // Reference to the closed book object
     public Animator handAnimator; // Animator for the girl's hand
 
+    public GameObject sittingGirl;  // Assign the sitting girl in the Inspector
+    public GameObject standingGirl; // Assign the standing girl in the Inspector
+
     public GameObject[] sceneObjects; // All objects to disable during the glitch
     public AudioSource[] sceneAudioSources; // Audio sources to stop during the glitch
 
@@ -92,6 +95,12 @@ public class GlitchEffect : MonoBehaviour
         if (closedBook != null)
         {
             closedBook.SetActive(false);
+        }
+
+        // Ensure standing girl is disabled at start
+        if (standingGirl != null)
+        {
+            standingGirl.SetActive(false);
         }
 
         // Automatically start glitch after initial delay
@@ -250,8 +259,16 @@ public class GlitchEffect : MonoBehaviour
             handAnimator.SetTrigger("StartHandAnimation"); // Play the hand animation
         }
 
-        // Wait for the hand animation to finish
-        yield return new WaitForSeconds(1f); // Adjust this to match the animation length
+        // Wait for the hand animation to finish (adjust duration as needed)
+        yield return new WaitForSeconds(1f);
+
+        // Disable the sitting girl and enable the standing girl
+        if (sittingGirl != null && standingGirl != null)
+        {
+            Debug.Log("Switching from sitting to standing girl...");
+            sittingGirl.SetActive(false);
+            standingGirl.SetActive(true);
+        }
 
         // Optional: Disable the Animator to lock the hand in the final position
         if (handAnimator != null)
@@ -260,6 +277,4 @@ public class GlitchEffect : MonoBehaviour
             Debug.Log("Hand animation completed, animator disabled.");
         }
     }
-
-
 }
