@@ -5,7 +5,7 @@ public class MovingPlatform : MonoBehaviour
     public int pathIndex; // Set in Inspector for each shelf
     private Vector3 targetPosition; // Where the shelf should move
     private Vector3 targetScale; // The final scale of the shelf
-    private float moveSpeed = 2f; // Speed of movement
+    private float moveSpeed = 6f; // Speed of movement
     private float scaleSpeed = 0.5f; // Speed of resizing
     private bool startMoving = false;
     private bool oscillating = false; // Enables floating motion
@@ -87,7 +87,6 @@ public class MovingPlatform : MonoBehaviour
 
     public void StartMoving()
     {
-        Debug.Log("🚀 Shelf " + pathIndex + " started moving to position " + targetPosition);
         startMoving = true;
     }
 }
