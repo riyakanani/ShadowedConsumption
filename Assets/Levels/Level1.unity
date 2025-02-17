@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 187390856}
   - component: {fileID: 187390855}
   - component: {fileID: 187390854}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grocery Store Shelve (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +552,7 @@ Transform:
   m_GameObject: {fileID: 187390852}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.0742, y: 0, z: 0}
+  m_LocalPosition: {x: -19.0742, y: 0.52, z: 0}
   m_LocalScale: {x: 0.3089011, y: 0.732908, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -590,7 +590,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -3.9604, y: 1.6653}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -601,7 +601,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2348575, y: 0.4323424}
+  m_Size: {x: 11.23107, y: 6.4808145}
   m_EdgeRadius: 0
 --- !u!114 &187390855
 MonoBehaviour:
@@ -2735,7 +2735,7 @@ GameObject:
   - component: {fileID: 682621858}
   - component: {fileID: 682621857}
   - component: {fileID: 682621856}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grocery Store Shelve (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2789,7 +2789,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 17.2, y: -2.3}
+  m_Offset: {x: 5.9953356, y: 3.1709797}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2800,7 +2800,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2635544, y: 0.4758772}
+  m_Size: {x: 12.254227, y: 6.817837}
   m_EdgeRadius: 0
 --- !u!114 &682621857
 MonoBehaviour:
@@ -3009,7 +3009,7 @@ GameObject:
   - component: {fileID: 689798746}
   - component: {fileID: 689798745}
   - component: {fileID: 689798744}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grocery Store Shelve (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3063,7 +3063,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 42.1053, y: 3.1574}
+  m_Offset: {x: -2.0277662, y: 2.9396758}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3074,7 +3074,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2873277, y: 0.5347999}
+  m_Size: {x: 11.470802, y: 6.414152}
   m_EdgeRadius: 0
 --- !u!114 &689798745
 MonoBehaviour:
@@ -8333,7 +8333,7 @@ GameObject:
   - component: {fileID: 773567414}
   - component: {fileID: 773567413}
   - component: {fileID: 773567412}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grocery Store Shelve (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8387,7 +8387,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 5.8, y: 0.3}
+  m_Offset: {x: -4.9039016, y: 2.6284108}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -8398,7 +8398,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2862278, y: 0.5212442}
+  m_Size: {x: 10.094031, y: 6.238921}
   m_EdgeRadius: 0
 --- !u!114 &773567413
 MonoBehaviour:
@@ -13548,7 +13548,7 @@ GameObject:
   - component: {fileID: 804953208}
   - component: {fileID: 804953207}
   - component: {fileID: 804953206}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grocery Store Shelve (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13602,7 +13602,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 26.5, y: -6.7}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -13613,7 +13613,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2862278, y: 0.5061463}
+  m_Size: {x: 14.256592, y: 7.765497}
   m_EdgeRadius: 0
 --- !u!114 &804953207
 MonoBehaviour:
@@ -19903,7 +19903,7 @@ GameObject:
   - component: {fileID: 1086906202}
   - component: {fileID: 1086906201}
   - component: {fileID: 1086906200}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grocery Store Shelve (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19957,7 +19957,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -14.21, y: 5.08}
+  m_Offset: {x: -1.3510962, y: 2.3369176}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -19968,7 +19968,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2419354, y: 0.4056035}
+  m_Size: {x: 10.679823, y: 5.0794396}
   m_EdgeRadius: 0
 --- !u!114 &1086906201
 MonoBehaviour:
@@ -25920,7 +25920,7 @@ GameObject:
   - component: {fileID: 1408896218}
   - component: {fileID: 1408896217}
   - component: {fileID: 1408896220}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grocery Store Shelve (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25974,7 +25974,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -5.280362, y: -13.643679}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -25985,7 +25985,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 13.649792, y: 8.573953}
+  m_Size: {x: 12.213387, y: 7.417948}
   m_EdgeRadius: 0
 --- !u!114 &1408896218
 MonoBehaviour:
@@ -32817,7 +32817,7 @@ GameObject:
   - component: {fileID: 1815517165}
   - component: {fileID: 1815517164}
   - component: {fileID: 1815517163}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grocery Store Shelve (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32871,7 +32871,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 34, y: -2.5}
+  m_Offset: {x: -2.1238036, y: 1.3402393}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -32882,7 +32882,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2559863, y: 0.4078633}
+  m_Size: {x: 11.043887, y: 6.058825}
   m_EdgeRadius: 0
 --- !u!114 &1815517164
 MonoBehaviour:
@@ -33599,7 +33599,7 @@ GameObject:
   - component: {fileID: 2019483938}
   - component: {fileID: 2019483937}
   - component: {fileID: 2019483936}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grocery Store Shelve (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33653,7 +33653,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -20.86, y: 0.05}
+  m_Offset: {x: 0, y: 0.95045376}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -33664,7 +33664,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.221791, y: 0.4367399}
+  m_Size: {x: 10.763702, y: 7.4853897}
   m_EdgeRadius: 0
 --- !u!114 &2019483937
 MonoBehaviour:
@@ -33873,7 +33873,7 @@ GameObject:
   - component: {fileID: 2068252934}
   - component: {fileID: 2068252933}
   - component: {fileID: 2068252932}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grocery Store Shelve (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33927,7 +33927,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -27.54, y: 4.77}
+  m_Offset: {x: 1.4152646, y: 2.1214442}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -33938,7 +33938,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2419354, y: 0.4099988}
+  m_Size: {x: 8.251719, y: 4.6528864}
   m_EdgeRadius: 0
 --- !u!114 &2068252933
 MonoBehaviour:

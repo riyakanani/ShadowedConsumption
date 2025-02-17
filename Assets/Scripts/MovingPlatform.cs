@@ -2,21 +2,18 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    public int pathIndex; 
+    public int pathIndex; // Set in Inspector for each shelf
     private Vector3 targetPosition; // Where the shelf should move
     private Vector3 targetScale; // The final scale of the shelf
     private float moveSpeed = 2f; // Speed of movement
     private float scaleSpeed = 0.5f; // Speed of resizing
     private bool startMoving = false;
-    private bool oscillating = false; 
-    private Vector3 startPosition; 
-    private BoxCollider2D boxCollider; 
+    private bool oscillating = false; // Enables floating motion
+    private Vector3 startPosition; // Stores final stopping position
 
     private void Start()
     {
-        boxCollider = GetComponent<BoxCollider2D>(); 
-
-        // **Manually**
+        // **Manually Defined Target Positions & Scales**
         Vector3[] pathPositions = new Vector3[]
         {
             new Vector3(-26.2227f, -6.9393f, 0),
@@ -45,16 +42,11 @@ public class MovingPlatform : MonoBehaviour
             new Vector3(0.2419354f, 0.4056035f, 1)
         };
 
+        // Assign the target position & scale based on pathIndex
         if (pathIndex >= 0 && pathIndex < pathPositions.Length)
         {
             targetPosition = pathPositions[pathIndex];
             targetScale = pathScales[pathIndex];
-
-            if (boxCollider != null)
-            {
-                boxCollider.size = new Vector2(targetScale.x, targetScale.y);
-                boxCollider.offset = Vector2.zero; 
-            }
         }
         else
         {
@@ -74,13 +66,6 @@ public class MovingPlatform : MonoBehaviour
 
                 // Scale the shelf toward its target size
                 transform.localScale = Vector3.Lerp(transform.localScale, targetScale, scaleSpeed * Time.deltaTime);
-
-                // **Ensure the collider keeps matching the shelf size**
-                if (boxCollider != null)
-                {
-                    boxCollider.size = new Vector2(targetScale.x, targetScale.y);
-                    boxCollider.offset = Vector2.zero;
-                }
 
                 // If the shelf reaches the target position, start floating motion
                 if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
