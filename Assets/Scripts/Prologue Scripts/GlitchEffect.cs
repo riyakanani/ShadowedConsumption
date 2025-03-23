@@ -17,6 +17,9 @@ public class SceneSequenceController : MonoBehaviour
     public GameObject spotlightOnGroceryStore;  // Spotlight to highlight the sign
     public GameObject shadowSpotlight;  // The spotlight for the shadow
     public GameObject roomLight;
+    public HappinessBar happinessBar;  // Correct, class name is HappinessBar                                       // Reference to the HappinessBar script
+    public Animator girlAnimator; // Animator for the girl
+
 
     // Thought bubble variables
     public GameObject thoughtBubble; // Thought bubble GameObject (PNG)
@@ -42,6 +45,12 @@ public class SceneSequenceController : MonoBehaviour
 
     void Start()
     {
+        // Ensure the girl starts in the sitting idle state
+        if (girlAnimator != null)
+        {
+            girlAnimator.SetBool("IsReading", true); 
+        }
+
         // Initial states
         openBook.SetActive(true);         // Open book visible
         closedBook.SetActive(false);      // Closed book hidden
@@ -86,7 +95,7 @@ public class SceneSequenceController : MonoBehaviour
         ShowThoughtBubble();
 
         // 5. After showing the thought bubble, show the thought text
-        yield return new WaitForSeconds(2f); // Longer delay for the thought text to be visible
+        yield return new WaitForSeconds(1f); // Longer delay for the thought text to be visible
         ShowThoughtText("This book is so good");
 
         // 6. Give more time for the girl to read, even after the thought bubble is shown (additional 6 seconds)
@@ -136,11 +145,16 @@ public class SceneSequenceController : MonoBehaviour
         yield return new WaitForSeconds(4f);
         ShowTextMessage2("Everyone is saying it is sooo yummy!! You've got to get some before they sell out!!");
 
+        happinessBar.OnFirstTextMessageAppears();
+
         // 16. Wait for another 4 seconds to allow the second text to be shown
         yield return new WaitForSeconds(4f);
 
         // 17. Disable text and text bubble, then show the thought bubble with chips
         HideTextAndBubble();
+
+        yield return new WaitForSeconds(3f); //small delay before she thinks again.
+
 
         // 2. Show the first circle (dot) for the thought bubble
         ShowFirstCircle();
@@ -149,6 +163,7 @@ public class SceneSequenceController : MonoBehaviour
         yield return new WaitForSeconds(0.5f); // Delay between circle 1 and circle 2
         ShowSecondCircle();
 
+        yield return new WaitForSeconds(0.5f); // Delay before the thought bubble appears
         ShowThoughtBubbleWithChips();
 
         // 18. Wait for 3 seconds, then disable the chips and thought bubble
@@ -394,7 +409,7 @@ public class SceneSequenceController : MonoBehaviour
     IEnumerator StopSparklesAfterAnimation()
     {
         // Wait until the grabbing animation ends (assuming it lasts 2 seconds)
-        yield return new WaitForSeconds(2f); // Adjust to match the duration of the grabbing animation
+        yield return new WaitForSeconds(4f); // Adjust to match the duration of the grabbing animation
 
         HideSparklingLines(); // Hide the sparkling lines
     }
@@ -412,6 +427,11 @@ public class SceneSequenceController : MonoBehaviour
         {
             shadowAnimator.speed = 0f; // Stop the shadow animation
             shadowAnimator.enabled = false; // Disable the shadow animator entirely
+        }
+
+        if (girlAnimator != null)
+        {
+            girlAnimator.SetBool("IsReading", false); // Stop the reading animation
         }
     }
 
