@@ -16494,6 +16494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthValue: 1
   shadowGrowMultiplier: 1.5
+  tokenUI: {fileID: 0}
 --- !u!212 &723098262
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -23615,6 +23616,7 @@ GameObject:
   - component: {fileID: 1421677800}
   - component: {fileID: 1421677802}
   - component: {fileID: 1421677801}
+  - component: {fileID: 1421677803}
   m_Layer: 6
   m_Name: Wall
   m_TagString: Ground
@@ -23631,7 +23633,7 @@ Transform:
   m_GameObject: {fileID: 1421677799}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.8, y: -8.76, z: 0.0974221}
+  m_LocalPosition: {x: -6.4, y: -5.9, z: 0.0974221}
   m_LocalScale: {x: 24.151865, y: 2.3242188, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23734,6 +23736,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1421677803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421677799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a773ea0dd7f0d45e19b5275071c53f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1463764824
 GameObject:
   m_ObjectHideFlags: 0
@@ -25182,7 +25196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 34768e95e0f234246b2fea073e96ca87, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.699999
+      value: 18.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 34768e95e0f234246b2fea073e96ca87, type: 3}
       propertyPath: m_LocalPosition.y
@@ -25190,7 +25204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 34768e95e0f234246b2fea073e96ca87, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.3
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 34768e95e0f234246b2fea073e96ca87, type: 3}
       propertyPath: m_LocalRotation.w
@@ -25432,6 +25446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthValue: 1
   shadowGrowMultiplier: 1.2
+  tokenUI: {fileID: 0}
 --- !u!1 &1834679086
 GameObject:
   m_ObjectHideFlags: 0

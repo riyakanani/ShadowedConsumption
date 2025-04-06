@@ -13,6 +13,8 @@ public class SceneSequenceController : MonoBehaviour
     public TextMeshProUGUI textMessage1; // TextMeshProUGUI for displaying the first message
     public TextMeshProUGUI textMessage2; // TextMeshProUGUI for displaying the second message
     public GameObject textBubble; // The text bubble GameObject (PNG)
+    [SerializeField] private GameObject Circle; //cirle for dialogue next button
+    [SerializeField] private GameObject X;//x for dialogue next button
     public GameObject goToGroceryStoreSign;  // The sign to go to the grocery store
     public GameObject spotlightOnGroceryStore;  // Spotlight to highlight the sign
     public GameObject shadowSpotlight;  // The spotlight for the shadow
@@ -136,14 +138,19 @@ public class SceneSequenceController : MonoBehaviour
         phoneInHand.SetActive(true);
 
         // 14. Wait for 2 seconds after phone appears, then display the first text message
-        yield return new WaitForSeconds(2f);
+        // yield return new WaitForSeconds(2f);
 
         // Show the text bubble and first text message
-        ShowTextMessage1("Hey, Did you hear about the new flavor of chips they are selling at the grocery store?");
+        // ShowTextMessage1("Hey, Did you hear about the new flavor of chips they are selling at the grocery store?");
 
         // 15. Wait for 4 seconds, then disable the first message and show the second message
         yield return new WaitForSeconds(4f);
-        ShowTextMessage2("Everyone is saying it is sooo yummy!! You've got to get some before they sell out!!");
+        // ShowTextMessage2("Everyone is saying it is sooo yummy!! You've got to get some before they sell out!!");
+        
+        Circle.gameObject.SetActive(true);
+        X.gameObject.SetActive(true);
+        textBubble.SetActive(true);
+        yield return new WaitUntil(() => !textBubble.activeSelf);
 
         happinessBar.OnFirstTextMessageAppears();
 
@@ -151,9 +158,9 @@ public class SceneSequenceController : MonoBehaviour
         yield return new WaitForSeconds(4f);
 
         // 17. Disable text and text bubble, then show the thought bubble with chips
-        HideTextAndBubble();
+        // HideTextAndBubble();
 
-        yield return new WaitForSeconds(3f); //small delay before she thinks again.
+        // yield return new WaitForSeconds(3f); //small delay before she thinks again.
 
 
         // 2. Show the first circle (dot) for the thought bubble
