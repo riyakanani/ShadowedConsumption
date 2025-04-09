@@ -19,15 +19,15 @@ public class SceneSequenceController : MonoBehaviour
     public GameObject spotlightOnGroceryStore;  // Spotlight to highlight the sign
     public GameObject shadowSpotlight;  // The spotlight for the shadow
     public GameObject roomLight;
-    public HappinessBar happinessBar;  // Correct, class name is HappinessBar                                       // Reference to the HappinessBar script
+    public GameObject happinessBar;  // Correct, class name is HappinessBar                                       // Reference to the HappinessBar script
     public Animator girlAnimator; // Animator for the girl
 
 
     // Thought bubble variables
     public GameObject thoughtBubble; // Thought bubble GameObject (PNG)
     public GameObject chipsAsset;    // The chips floating asset (image or 3D object)
-    public TextMeshProUGUI thoughtBubbleText; // Text inside the thought bubble
-    public TextMeshProUGUI chipsText; // Text below the chips (thought continuation)
+    public GameObject thoughtBubbleText; // Text inside the thought bubble
+    public GameObject chipsText; // Text below the chips (thought continuation)
 
     // Shadow face and animator references
     public GameObject oldShadowFace;  // The old face of the shadow
@@ -44,7 +44,7 @@ public class SceneSequenceController : MonoBehaviour
 
     // Sparkling lines effect (already existing as a GameObject in the scene)
     public GameObject sparklingLines; // The sparkling lines GameObject
-
+    
     void Start()
     {
         // Ensure the girl starts in the sitting idle state
@@ -64,10 +64,6 @@ public class SceneSequenceController : MonoBehaviour
         chipsAsset.SetActive(false); // Hide the chips asset initially
         oldShadowFace.SetActive(true); // Show the old shadow face initially
         newShadowFace.SetActive(false); // Hide the new shadow face initially
-
-        // Set text inside the thought bubble
-        thoughtBubbleText.text = "This book is so good";
-        chipsText.text = "Maybe I should go and get some"; // Default chips text
 
         // Start page-turning sound loop
         if (pageTurningSound != null)
@@ -98,7 +94,7 @@ public class SceneSequenceController : MonoBehaviour
 
         // 5. After showing the thought bubble, show the thought text
         yield return new WaitForSeconds(1f); // Longer delay for the thought text to be visible
-        ShowThoughtText("This book is so good");
+        ShowThoughtText(thoughtBubbleText);
 
         // 6. Give more time for the girl to read, even after the thought bubble is shown (additional 6 seconds)
         yield return new WaitForSeconds(6f); // Allow the girl to continue reading with the thought bubble visible
@@ -107,7 +103,7 @@ public class SceneSequenceController : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // **Disable everything when it's time for the text messages**
-        HideThoughtBubbleAndText();
+        HideThoughtBubbleAndText(thoughtBubbleText);
 
         // 9. Phone starts ringing at 7 seconds
         if (phoneRingSound != null)
@@ -152,7 +148,9 @@ public class SceneSequenceController : MonoBehaviour
         textBubble.SetActive(true);
         yield return new WaitUntil(() => !textBubble.activeSelf);
 
-        happinessBar.OnFirstTextMessageAppears();
+        //15.1 set the happiness bar visible
+        yield return new WaitForSeconds(4f);
+        happinessBar.SetActive(true);
 
         // 16. Wait for another 4 seconds to allow the second text to be shown
         yield return new WaitForSeconds(4f);
@@ -186,7 +184,7 @@ public class SceneSequenceController : MonoBehaviour
         }
 
         // Disable the thought bubble, chips asset, and chips text
-        HideThoughtBubbleAndText();
+        HideThoughtBubbleAndText(chipsText);
         if (chipsAsset != null)
         {
             chipsAsset.SetActive(false);  // Hide the chips asset
@@ -271,17 +269,16 @@ public class SceneSequenceController : MonoBehaviour
     }
 
     // Function to show the thought text inside the thought bubble
-    void ShowThoughtText(string message)
+    void ShowThoughtText(GameObject textHolder)
     {
-        thoughtBubbleText.text = message; // Set the text for the thought bubble
-        if (thoughtBubbleText != null)
+        if (textHolder != null)
         {
-            thoughtBubbleText.gameObject.SetActive(true); // Enable the text inside the thought bubble
+            textHolder.SetActive(true); // Enable the text inside the thought bubble
         }
     }
 
     // Function to hide the thought bubble and text (when switching to the next sequence like text messages)
-    void HideThoughtBubbleAndText()
+    void HideThoughtBubbleAndText(GameObject textHolder)
     {
         if (circle1 != null)
         {
@@ -297,7 +294,7 @@ public class SceneSequenceController : MonoBehaviour
         }
         if (thoughtBubbleText != null)
         {
-            thoughtBubbleText.gameObject.SetActive(false); // Hide the text inside the thought bubble
+            textHolder.SetActive(false); // Hide the text inside the thought bubble
         }
     }
 

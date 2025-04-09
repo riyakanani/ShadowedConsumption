@@ -686,6 +686,7 @@ GameObject:
   - component: {fileID: 1592637012}
   - component: {fileID: 1592637011}
   - component: {fileID: 1592637010}
+  - component: {fileID: 1592637013}
   m_Layer: 0
   m_Name: Untitled_Artwork-1
   m_TagString: Untagged
@@ -774,13 +775,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592637009}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.05, y: -0.69, z: -0.94}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1592637013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592637009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97e9cdb45cd94bbca3fae4c810f21f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationName: FinalBossFight
 --- !u!1 &1910813180
 GameObject:
   m_ObjectHideFlags: 0

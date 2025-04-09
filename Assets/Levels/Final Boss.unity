@@ -793,7 +793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 2259357095023485256, guid: 8f88436865feb42a68383041f6ef852a, type: 3}
   bulletPos: {fileID: 1859408814}
-  enemy: {fileID: 0}
+  enemy: {fileID: 10597729}
 --- !u!1 &151506980
 GameObject:
   m_ObjectHideFlags: 0

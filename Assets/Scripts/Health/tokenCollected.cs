@@ -13,7 +13,7 @@ public class tokenCollected : MonoBehaviour
     {
         total = CountHealthCollectables(); // Assign value in Start()
         
-        if (textElement != null)
+        if (textElement != null && total > 0)
         {
             textElement.text = count + "/" + total + " tokens";
         }

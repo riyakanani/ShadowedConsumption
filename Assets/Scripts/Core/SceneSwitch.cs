@@ -11,6 +11,8 @@ public class SceneSwitch : MonoBehaviour
         }
     }
 
+    
+
     public void playGame(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

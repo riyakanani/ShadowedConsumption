@@ -17,36 +17,38 @@ public class MovingPlatform : MonoBehaviour
         Vector3[] pathPositions = new Vector3[]
         {
             new Vector3(-26.2227f, -6.9393f, 0),
-            new Vector3(-3.9604f, 2.6653f, 0),
+            new Vector3(-9.73f, 7.73f, 0),
             new Vector3(-20.86f, 0.05f, 0),
             new Vector3(26.5f, -5.7f, 0),
             new Vector3(34f, -1.5f, 0),
             new Vector3(5.8f, 0.3f, 0),
             new Vector3(17.2f, -1.3f, 0),
             new Vector3(-27.54f, 5.77f, 0),
-            new Vector3(42.1053f, 4.1574f, 0),
+            new Vector3(0.8f, -5.06f, 0),
             new Vector3(-14.21f, 6.08f, 0)
         };
 
-        Vector3[] pathScales = new Vector3[]
-        {
-            new Vector3(0.2245258f, 0.4361229f, 1),
-            new Vector3(0.2348575f, 0.4323424f, 1),
-            new Vector3(0.221791f, 0.4367399f, 1),
-            new Vector3(0.2862278f, 0.5061463f, 1),
-            new Vector3(0.2559863f, 0.4078633f, 1),
-            new Vector3(0.2862278f, 0.5212442f, 1),
-            new Vector3(0.2635544f, 0.4758772f, 1),
-            new Vector3(0.2419354f, 0.4099988f, 1),
-            new Vector3(0.2873277f, 0.5347999f, 1),
-            new Vector3(0.2419354f, 0.4056035f, 1)
-        };
+        // Vector3[] pathScales = new Vector3[]
+        // {
+        //     new Vector3(0.2245258f, 0.4361229f, 1),
+        //     new Vector3(0.2348575f, 0.4323424f, 1),
+        //     new Vector3(0.221791f, 0.4367399f, 1),
+        //     new Vector3(0.2862278f, 0.5061463f, 1),
+        //     new Vector3(0.2559863f, 0.4078633f, 1),
+        //     new Vector3(0.2862278f, 0.5212442f, 1),
+        //     new Vector3(0.2635544f, 0.4758772f, 1),
+        //     new Vector3(0.2419354f, 0.4099988f, 1),
+        //     new Vector3(0.2873277f, 0.5347999f, 1),
+        //     new Vector3(0.2419354f, 0.4056035f, 1)
+        // };
 
         // Assign the target position & scale based on pathIndex
         if (pathIndex >= 0 && pathIndex < pathPositions.Length)
         {
-            targetPosition = pathPositions[pathIndex];
-            targetScale = pathScales[pathIndex];
+            // targetPosition = pathPositions[pathIndex];
+            // targetScale = pathScales[pathIndex];
+            targetPosition = transform.position;
+            targetScale = transform.localScale;
         }
         else
         {
@@ -65,7 +67,7 @@ public class MovingPlatform : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
                 // Scale the shelf toward its target size
-                transform.localScale = Vector3.Lerp(transform.localScale, targetScale, scaleSpeed * Time.deltaTime);
+                // transform.localScale = Vector3.Lerp(transform.localScale, targetScale, scaleSpeed * Time.deltaTime);
 
                 // If the shelf reaches the target position, start floating motion
                 if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
