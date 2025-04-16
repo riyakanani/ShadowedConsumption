@@ -7,6 +7,7 @@ public class SceneSequenceController : MonoBehaviour
 {
     // Assign these in the Inspector
     public GameObject shadowArmsReaching;
+    public GameObject shadow;
     public AudioSource pageTurningSound; // AudioSource for page-turning sound
     public AudioSource phoneRingSound; // AudioSource for phone ringing sound
     public TextMeshProUGUI textMessage1; // TextMeshProUGUI for displaying the first message
@@ -209,7 +210,13 @@ public class SceneSequenceController : MonoBehaviour
    
     void TriggerArmMovement()
     {
-        if (shadowArmsReaching = null) shadowArmsReaching.SetActive(true);
+        if (shadowArmsReaching != null)
+        {
+            shadowArmsReaching.SetActive(true);
+        }
+
+        if (shadow != null) shadow.SetActive(false);
+
         StartCoroutine(StopSparklesAfterAnimation());
     }
 
