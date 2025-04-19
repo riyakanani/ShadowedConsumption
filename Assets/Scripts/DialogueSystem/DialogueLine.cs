@@ -1,15 +1,14 @@
-//https://www.youtube.com/watch?v=iCybBI9_M2E&ab_channel=Pandemonium
-
 using System.Collections;
 using UnityEngine;
-using TMPro; // Import the TextMeshPro namespace
+using TMPro;
 using UnityEngine.UI;
 
 namespace DialogueSystem
 {
     public class DialogueLine : DialogueBaseClass
     {
-        private TMP_Text textHolder; // Change to TMP_Text
+        private TMP_Text textHolder;
+        private AudioSource audioSource;
 
         [Header("Text Options")]
         [SerializeField] private string input;
@@ -18,43 +17,46 @@ namespace DialogueSystem
         [SerializeField] private AudioClip sound;
 
         [Header("Time Parameter")]
-        [SerializeField] private float delay;
-        [SerializeField] private float delayBetweenLines;
+        [SerializeField] private float delay = 0.05f;
+        [SerializeField] private float delayBetweenLines = 1f;
 
         [Header("Character Image")]
         [SerializeField] private Sprite characterSprite;
         [SerializeField] private Image imageHolder = null;
 
         [Header("Action Trigger (Optional)")]
-        [SerializeField] private GameObject actionObject; // The object to activate during this dialogue line
+        [SerializeField] private GameObject actionObject;
 
-        [Header("Hat Transfer Trigger (Optional)")]
-        [SerializeField] private HatTransfer hatTransfer; // Reference to the HatTransfer script
+        [Header("Click Option (UI Button)")]
+        [SerializeField] private Button xButton;
 
         private IEnumerator lineAppear;
 
         private void Awake()
         {
+            textHolder = GetComponent<TMP_Text>();
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.clip = sound;
+            audioSource.loop = true;
+
             imageHolder.sprite = characterSprite;
             imageHolder.preserveAspect = true;
+
+            if (xButton != null)
+            {
+                xButton.onClick.AddListener(HandleDialogueSkipOrFinish);
+            }
         }
 
         private void OnEnable()
         {
             ResetLine();
-            lineAppear = WriteText(input, textHolder, sound, delayBetweenLines, delay);
+            lineAppear = WriteText(input);
             StartCoroutine(lineAppear);
 
-            // Trigger the action object (if assigned)
             if (actionObject != null)
             {
                 actionObject.SetActive(true);
-            }
-
-            // Trigger the hat transfer (if assigned)
-            if (hatTransfer != null)
-            {
-                hatTransfer.TransferHat();
             }
         }
 
@@ -62,29 +64,49 @@ namespace DialogueSystem
         {
             if (Input.GetKeyDown(KeyCode.X))
             {
-                if (textHolder.text != input)
-                {
-                    StopCoroutine(lineAppear);
-                    textHolder.text = input;
-                }
-                else
-                {
-                    finished = true;
-                }
+                HandleDialogueSkipOrFinish();
+            }
+        }
+
+        private void HandleDialogueSkipOrFinish()
+        {
+            if (textHolder.text != input)
+            {
+                StopCoroutine(lineAppear);
+                textHolder.text = input;
+                audioSource.Stop();
+            }
+            else
+            {
+                finished = true;
             }
         }
 
         private void ResetLine()
         {
-            textHolder = GetComponent<TMP_Text>();
             textHolder.text = "";
             finished = false;
 
-            // Ensure the actionObject is inactive at the start
             if (actionObject != null)
             {
                 actionObject.SetActive(false);
             }
+        }
+
+        private IEnumerator WriteText(string input)
+        {
+            textHolder.text = "";
+            audioSource.Play();
+
+            foreach (char c in input)
+            {
+                textHolder.text += c;
+                yield return new WaitForSeconds(delay);
+            }
+
+            audioSource.Stop();
+            yield return new WaitForSeconds(delayBetweenLines);
+            finished = true;
         }
     }
 }
