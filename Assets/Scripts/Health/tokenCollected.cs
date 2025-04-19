@@ -15,7 +15,8 @@ public class tokenCollected : MonoBehaviour
         
         if (textElement != null && total > 0)
         {
-            textElement.text = count + "/" + total + " tokens";
+            textElement.text = "";
+            //textElement.text = count + "/" + total + " Items";
         }
     }
 
@@ -24,12 +25,21 @@ public class tokenCollected : MonoBehaviour
         return GameObject.FindGameObjectsWithTag("HealthCollectable").Length;
     }
 
+    public void ShowCount(){
+        total = CountHealthCollectables(); // Assign value in Start()
+        
+        if (textElement != null && total > 0)
+        {
+            textElement.text = count + "/" + total + " Items";
+        }
+    }
+
     public void Increase()
     {
         count++; // Increment count
         if (textElement != null)
         {
-            textElement.text = count + "/" + total + " tokens";
+            textElement.text = count + "/" + total + " Items";
         }
     }
 }

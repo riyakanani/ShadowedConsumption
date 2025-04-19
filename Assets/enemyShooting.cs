@@ -31,7 +31,7 @@ public class enemyShooting : MonoBehaviour
 
         // Adjust the scale while maintaining the original sign
         Vector3 newScale = new Vector3(
-            Mathf.Sign(currentScale.x) * (Mathf.Abs(currentScale.x) + 0.1f),  // Increase X
+            -Mathf.Sign(currentScale.x) * (Mathf.Abs(currentScale.x) - 0.1f),  // Increase X
             Mathf.Sign(currentScale.y) * (Mathf.Abs(currentScale.y) - 0.1f),  // Decrease Y
             Mathf.Sign(currentScale.z) * (Mathf.Abs(currentScale.z) - 0.1f)   // Decrease Z
         );
@@ -41,7 +41,7 @@ public class enemyShooting : MonoBehaviour
 
         // Check if any scale component is less than 0.5
         if (newScale.x < 0.5f || newScale.y < 0.5f || newScale.z < 0.5f) {
-            Destroy(enemy.gameObject); // Destroy the enemy if any scale is below 0.5
+            Destroy(transform.parent.gameObject); // Destroy the enemy if any scale is below 0.5
         }
     }
 }
