@@ -27,17 +27,22 @@ public class PlayerMovementOne : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
 
         // Flip player sprite depending on movement direction
-        if (horizontalInput > 0.01f)
+        //if (horizontalInput > 0.01f)
+        //{
+        //    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        //}
+        //else if (horizontalInput < -0.01f)
+        //{
+        //    transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        //}
+
+        if (Mathf.Abs(horizontalInput) > 0.01f)
         {
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-        }
-        else if (horizontalInput < -0.01f)
-        {
-            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(Mathf.Sign(horizontalInput) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
 
         // Set animator parameters based on movement
-        anim.SetBool("isWalking", horizontalInput != 0); // Make sure your walk animation state is tied to this bool
+        anim.SetBool("run", horizontalInput != 0); // Make sure your walk animation state is tied to this bool
 
         // Apply movement
         body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
