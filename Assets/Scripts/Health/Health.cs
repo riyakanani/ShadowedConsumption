@@ -3,23 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class Health : MonoBehaviour
 {
+    private SpriteRenderer spriteRenderer;
+    [SerializeField] private Color hurtColor = Color.red;
+    [SerializeField] private float hurtFlashDuration = 0.2f;
     [SerializeField] private float startingHealth;
     public float currentHealth{get; private set;}
     private Animator anim;
     private bool dead;
     private void Awake(){
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         currentHealth = startingHealth;
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     public void TakeDamage(float _damage){
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
         if(currentHealth > 0){
             anim.SetTrigger("hurt");
+            StartCoroutine(FlashRed());
             //iframe
-        } else {
+        }
+        else {
             if(!dead){
                 anim.SetTrigger("die");
                 GetComponent<PlayerMovement>().enabled = false;
@@ -33,4 +40,18 @@ public class Health : MonoBehaviour
     public void AddHealth(float _value){
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
     }
+
+    private IEnumerator FlashRed()
+    {
+        if (spriteRenderer == null)
+            yield break;
+
+        Color originalColor = spriteRenderer.color;
+        spriteRenderer.color = hurtColor;
+
+        yield return new WaitForSeconds(hurtFlashDuration);
+
+        spriteRenderer.color = originalColor;
+    }
+
 }

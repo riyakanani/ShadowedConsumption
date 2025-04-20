@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
@@ -108,7 +108,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
 
     private bool isGrounded()
     {

@@ -37173,7 +37173,7 @@ GameObject:
   - component: {fileID: 1182265284}
   m_Layer: 0
   m_Name: Visual
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66097,7 +66097,7 @@ Transform:
   m_GameObject: {fileID: 1815917371}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -34.47, y: -8.31, z: 0}
+  m_LocalPosition: {x: -34.47, y: -10.15, z: 0}
   m_LocalScale: {x: 0.2280082, y: 0.2280082, z: 0.2280082}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -66157,18 +66157,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.28080237, y: 0.07145119}
+  m_Offset: {x: 0.080571294, y: 2.9547772}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 4.34, y: 5.68}
-    newSize: {x: 10.24, y: 15.36}
+    newSize: {x: 4.34, y: 5.68}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.416457, y: 6.7812357}
+  m_Size: {x: 4.015996, y: 6.460866}
   m_EdgeRadius: 0
 --- !u!114 &1815917381
 MonoBehaviour:
