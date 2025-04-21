@@ -23,27 +23,30 @@ public class verticalMove : MonoBehaviour
         // If we've moved too far, flip direction
         if (Mathf.Abs(distanceFromStart) >= moveDistance)
         {
-            direction *= -1; // Reverse direction
-            distanceFromStart = -distanceFromStart;
+            direction *= -1;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("here");
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("here2");
-            // Parent the player to the platform
             collision.transform.SetParent(this.transform);
         }
     }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // Un-parent the player from the platform
-            collision.transform.SetParent(null);
+            // Use coroutine to safely un-parent
+            StartCoroutine(DelayedUnparent(collision.transform));
         }
+    }
+
+    private IEnumerator DelayedUnparent(Transform player)
+    {
+        yield return null; // Wait one frame
+        player.SetParent(null);
     }
 }
