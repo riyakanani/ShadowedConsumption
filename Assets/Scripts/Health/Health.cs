@@ -19,21 +19,23 @@ public class Health : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
     }
 
-    public void TakeDamage(float _damage){
+    public void TakeDamage(float _damage)
+    {
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
-        if(currentHealth > 0){
-            anim.SetTrigger("hurt");
-            StartCoroutine(FlashRed());
-            //iframe
+        if (currentHealth > 0)
+        {
+            // Remove anim.SetTrigger("hurt"); 
+            StartCoroutine(FlashRed()); // Only flash red, don't play "hurt"
         }
-        else {
-            if(!dead){
+        else
+        {
+            if (!dead)
+            {
                 anim.SetTrigger("die");
                 GetComponent<PlayerMovement>().enabled = false;
                 dead = true;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
-           
         }
     }
 
