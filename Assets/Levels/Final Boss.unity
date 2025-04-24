@@ -28176,6 +28176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d1f513717f824770904054a43663e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtColor: {r: 1, g: 0, b: 0, a: 1}
+  hurtFlashDuration: 0.2
   startingHealth: 4
 --- !u!4 &1744213546
 Transform:

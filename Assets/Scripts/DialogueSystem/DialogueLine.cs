@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace DialogueSystem
 {
@@ -40,7 +41,7 @@ namespace DialogueSystem
             audioSource.loop = true;
 
             imageHolder.sprite = characterSprite;
-            imageHolder.preserveAspect = true;
+            // imageHolder.preserveAspect = true;
 
             if (xButton != null)
             {
@@ -79,6 +80,14 @@ namespace DialogueSystem
             else
             {
                 finished = true;
+
+                int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+                int totalScenes = SceneManager.sceneCountInBuildSettings;
+                if (currentSceneIndex == totalScenes - 1)
+                {
+                    // If it's the last scene, go back to scene 0 (usually the main menu)
+                    SceneManager.LoadScene(0);
+                }
             }
         }
 
@@ -107,6 +116,13 @@ namespace DialogueSystem
             audioSource.Stop();
             yield return new WaitForSeconds(delayBetweenLines);
             finished = true;
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+                int totalScenes = SceneManager.sceneCountInBuildSettings;
+                if (currentSceneIndex == totalScenes - 1)
+                {
+                    // If it's the last scene, go back to scene 0 (usually the main menu)
+                    SceneManager.LoadScene(0);
+                }
         }
     }
 }

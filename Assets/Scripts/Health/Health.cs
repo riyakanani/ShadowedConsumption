@@ -9,7 +9,7 @@ public class Health : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     [SerializeField] private Color hurtColor = Color.red;
     [SerializeField] private float hurtFlashDuration = 0.2f;
-    [SerializeField] private float startingHealth;
+    [SerializeField] private float startingHealth = 4.0f;
     public float currentHealth{get; private set;}
     private Animator anim;
     private bool dead;

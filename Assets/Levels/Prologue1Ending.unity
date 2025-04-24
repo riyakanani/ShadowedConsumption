@@ -3497,7 +3497,7 @@ GameObject:
   - component: {fileID: 998932358}
   - component: {fileID: 998932357}
   m_Layer: 0
-  m_Name: Grocery Store Sign Placeholder
+  m_Name: olderry Store Sign Placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3817,7 +3817,6 @@ MonoBehaviour:
   circle2: {fileID: 452337628}
   circle3: {fileID: 1489318119}
   shadow: {fileID: 1971095499}
-  enlargedShadowScale: {x: 1, y: 1, z: 1}
   shadowGrowDuration: 0.5
   roomLight: {fileID: 855502675}
   finalSpotlight: {fileID: 478309513}

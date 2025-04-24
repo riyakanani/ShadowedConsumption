@@ -18,6 +18,12 @@ EditorBuildSettings:
     path: Assets/Levels/Level1 1editing.unity
     guid: 95588b8c65e1b40b28a11b64683d0afa
   - enabled: 1
+    path: Assets/Levels/NeighborhoodWalkingBack.unity
+    guid: 2dade8158505f4908b4149d78a19de50
+  - enabled: 1
+    path: Assets/Levels/Prologue1Ending.unity
+    guid: 7597caa10709e40dfad7351591bdce54
+  - enabled: 1
     path: Assets/Levels/Level 2 final.unity
     guid: b4e88b2879092491c963d5e14d2e8af2
   - enabled: 1
@@ -26,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/Final Boss.unity
     guid: c8fd7fd90c1ba4376aa696b1626d1439
+  - enabled: 1
+    path: Assets/Levels/GameOver.unity
+    guid: 61d5fd942e73e4827a42adfa23b333ce
+  - enabled: 1
+    path: Assets/Levels/EndingMessage.unity
+    guid: d48fec401f9ec4e2d8b5f680b85c9178
   m_configObjects: {}

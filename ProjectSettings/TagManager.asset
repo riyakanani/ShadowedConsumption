@@ -8,6 +8,7 @@ TagManager:
   - NPC
   - Platform
   - HealthCollectable
+  - x
   layers:
   - Default
   - TransparentFX

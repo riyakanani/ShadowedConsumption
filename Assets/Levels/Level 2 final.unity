@@ -6639,12 +6639,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 210f93005e0cf49d190525f8295c1ca6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9eec18db1fd5648168a4c533cad8f58c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 43.446392, y: 13.28}
+  m_Size: {x: 47.217773, y: 13.279999}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -6659,8 +6659,8 @@ Transform:
   m_GameObject: {fileID: 221716722}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.2, y: 0.8, z: 3.2025}
-  m_LocalScale: {x: 2.0950313, y: 1.6814977, z: 1.6511171}
+  m_LocalPosition: {x: 20.7, y: 2.9, z: 3.2025}
+  m_LocalScale: {x: 2.462021, y: 1.9760484, z: 1.9403458}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -23805,6 +23805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d1f513717f824770904054a43663e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtColor: {r: 1, g: 0, b: 0, a: 1}
+  hurtFlashDuration: 0.2
   startingHealth: 4
 --- !u!95 &830739377
 Animator:
@@ -36030,6 +36032,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d1f513717f824770904054a43663e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtColor: {r: 1, g: 0, b: 0, a: 1}
+  hurtFlashDuration: 0.2
   startingHealth: 4
 --- !u!4 &1471367924
 Transform:
@@ -36040,7 +36044,7 @@ Transform:
   m_GameObject: {fileID: 1471367922}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.47, y: -8.31, z: 0}
+  m_LocalPosition: {x: -33.45, y: -7.23, z: 0}
   m_LocalScale: {x: 0.31420827, y: 0.31420827, z: 0.31420827}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -36488,7 +36492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1589437746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36639,7 +36643,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15.77879, y: 5.4469}
+  m_AnchoredPosition: {x: -30.3, y: 5.6}
   m_SizeDelta: {x: 15.0946, y: 4.9145}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1619693832

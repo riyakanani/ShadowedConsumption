@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class enemyShooting : MonoBehaviour
 {
@@ -42,6 +43,8 @@ public class enemyShooting : MonoBehaviour
         // Check if any scale component is less than 0.5
         if (newScale.x < 0.5f || newScale.y < 0.5f || newScale.z < 0.5f) {
             Destroy(transform.parent.gameObject); // Destroy the enemy if any scale is below 0.5
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
         }
     }
 }
