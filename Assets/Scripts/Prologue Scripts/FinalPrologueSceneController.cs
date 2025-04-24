@@ -161,7 +161,6 @@ public class FinalPrologueSceneController : MonoBehaviour
         shadow.transform.localScale = targetScale;
     }
 
-
     void ShowCircle(GameObject circle)
     {
         if (circle != null) circle.SetActive(true);
