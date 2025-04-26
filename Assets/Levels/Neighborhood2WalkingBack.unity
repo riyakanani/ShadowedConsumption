@@ -662,6 +662,10 @@ MonoBehaviour:
     m_Bits: 64
   Circle: {fileID: 0}
   X: {fileID: 0}
+  wallCheck: {fileID: 0}
+  mwallLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &469495959
 Rigidbody2D:
   serializedVersion: 4
@@ -1294,7 +1298,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 737704964}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1316,7 +1320,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.017505646, y: -3.48605}
@@ -1683,6 +1687,10 @@ MonoBehaviour:
     m_Bits: 64
   Circle: {fileID: 0}
   X: {fileID: 0}
+  wallCheck: {fileID: 0}
+  mwallLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!95 &852552764
 Animator:
   serializedVersion: 5
@@ -1949,10 +1957,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1114569086}
-  - component: {fileID: 1114569085}
   - component: {fileID: 1114569084}
   - component: {fileID: 1114569083}
-  - component: {fileID: 1114569082}
+  - component: {fileID: 1114569087}
   m_Layer: 0
   m_Name: go_home_sign_cleaned_processed (1)
   m_TagString: Untagged
@@ -1960,19 +1967,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1114569082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1114569081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23758ed476657498cba996282f1f2b8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextSceneName: Prologue1Ending
 --- !u!61 &1114569083
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2070,19 +2064,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1114569085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1114569081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23758ed476657498cba996282f1f2b8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextSceneName: Prologue1Ending
 --- !u!4 &1114569086
 Transform:
   m_ObjectHideFlags: 0
@@ -2098,6 +2079,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1114569087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114569081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a773ea0dd7f0d45e19b5275071c53f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1114913396
 GameObject:
   m_ObjectHideFlags: 0
