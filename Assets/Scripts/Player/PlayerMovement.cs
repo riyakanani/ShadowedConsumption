@@ -20,19 +20,10 @@ public class PlayerMovement : MonoBehaviour
     private float wallJumpCooldown;
     private float horizontalInput;
 
-    [Header("Wall Slide")]
-    [SerializeField] private float wallSlideSpeed = 2f;
+    private float wallSlidingSpeed = 2f;
+    [SerializeField] private Transform wallCheck;
+    // [SerializeField] private wallLayer;
 
-    [SerializeField] private float platformSlideSpeed = 2f;
-    [SerializeField] private float defaultGravity = 5f;
-    [SerializeField] private float sideCastDistance = 0.5f;
-    private bool isPlatformSliding = false;
-
-
-    [Header("Slide Settings")]
-    [SerializeField] private float slideSpeed = 2f;           // max downward speed while sliding
-    [SerializeField] private float slideGravityScale = 5f;    // gravity while sliding
-    [SerializeField] private float normalGravityScale = 5f;   // gravity when not sliding
 
     private void Awake()
     {
@@ -78,35 +69,27 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void FixedUpdate()
-{
-    if (inDialogue()) return;
-
-    // --- 1) Slide handling ---
-    if (isPlatformSliding)
     {
-        body.gravityScale = slideGravityScale;
+        if (!inDialogue())
+        {
+            if (wallJumpCooldown > 0.2f)
+            {
+                // Apply movement
+                body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
-        if (body.velocity.y < -slideSpeed)
-            body.velocity = new Vector2(body.velocity.x, -slideSpeed);
-
-        Debug.Log($"Platform‐sliding: velY={body.velocity.y:F2}");
+                // Handle wall slide
+                if (onWall() && !isGrounded())
+                {
+                    body.gravityScale = 0;
+                    body.velocity = Vector2.zero;
+                }
+                else
+                {
+                    body.gravityScale = 5;
+                }
+            }
+        }
     }
-    else
-    {
-        body.gravityScale = normalGravityScale;
-    }
-
-    // --- 2) Your existing horizontal + wall‐jump cooldown logic ---
-    if (wallJumpCooldown > 0.2f)
-    {
-        body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
-    }
-    else
-    {
-        wallJumpCooldown += Time.deltaTime;
-    }
-}
-
 
     private void Jump()
     {
@@ -143,21 +126,6 @@ public class PlayerMovement : MonoBehaviour
         return raycastHit.collider != null;
     }
 
-    private bool onPlatformSide()
-    {
-        // cast horizontally in the direction the player is facing
-        Vector2 dir = new Vector2(transform.localScale.x, 0f);
-        RaycastHit2D hit = Physics2D.BoxCast(
-            boxCollider.bounds.center,
-            boxCollider.bounds.size,
-            0f,
-            dir,
-            sideCastDistance
-        );
-        return hit.collider != null && hit.collider.CompareTag("Platform");
-    }
-
-
     private bool inDialogue()
     {
         return npc != null && npc.DialogueActive();
@@ -182,35 +150,5 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         npc = null;
-    }
-
-
-    private void OnCollisionStay2D(Collision2D col)
-    {
-        // reset each frame
-        isPlatformSliding = false;
-
-        // only care about things tagged “Platform”
-        if (!col.gameObject.CompareTag("Platform")) 
-            return;
-
-        // check each contact point
-        foreach (var contact in col.contacts)
-        {
-            // side contacts have a mostly‐horizontal normal
-            if (Mathf.Abs(contact.normal.x) > 0.5f)
-            {
-                // normal.x points *out* of the platform; 
-                // we want the player to be pushing *into* it:
-                float pushDir = Mathf.Sign(horizontalInput);
-                float hitSide = -Mathf.Sign(contact.normal.x);
-
-                if (pushDir == hitSide && !isGrounded())
-                {
-                    isPlatformSliding = true;
-                    return; // once we know, we can stop checking
-                }
-            }
-        }
     }
 }
