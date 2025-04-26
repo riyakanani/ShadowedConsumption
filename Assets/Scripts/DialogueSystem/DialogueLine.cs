@@ -81,13 +81,13 @@ namespace DialogueSystem
             {
                 finished = true;
 
-                int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-                int totalScenes = SceneManager.sceneCountInBuildSettings;
-                if (currentSceneIndex == totalScenes - 1)
-                {
-                    // If it's the last scene, go back to scene 0 (usually the main menu)
-                    SceneManager.LoadScene(0);
-                }
+                //int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+                //int totalScenes = SceneManager.sceneCountInBuildSettings;
+                //if (currentSceneIndex == totalScenes - 1)
+                //{
+                //    // If it's the last scene, go back to scene 0 (usually the main menu)
+                //    SceneManager.LoadScene(0);
+                //}
             }
         }
 
@@ -116,13 +116,13 @@ namespace DialogueSystem
             audioSource.Stop();
             yield return new WaitForSeconds(delayBetweenLines);
             finished = true;
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-                int totalScenes = SceneManager.sceneCountInBuildSettings;
-                if (currentSceneIndex == totalScenes - 1)
-                {
-                    // If it's the last scene, go back to scene 0 (usually the main menu)
-                    SceneManager.LoadScene(0);
-                }
+            //int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            //    int totalScenes = SceneManager.sceneCountInBuildSettings;
+            //    if (currentSceneIndex == totalScenes - 1)
+            //    {
+            //        // If it's the last scene, go back to scene 0 (usually the main menu)
+            //        SceneManager.LoadScene(0);
+            //    }
         }
     }
 }
