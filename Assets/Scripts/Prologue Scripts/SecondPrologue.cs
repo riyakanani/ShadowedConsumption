@@ -23,6 +23,7 @@ public class SecondPrologue : MonoBehaviour
     public GameObject goToShoppingCenterSign;
     public GameObject spotlight;
     public GameObject roomLight;
+    public GameObject shadowSpotlight;
 
     public GameObject shadowArmsReaching;
     public GameObject shadow;
@@ -37,6 +38,8 @@ public class SecondPrologue : MonoBehaviour
 
     void Start()
     {
+
+
         if (backgroundMusic != null)
         {
             backgroundMusic.loop = true;
@@ -85,16 +88,6 @@ public class SecondPrologue : MonoBehaviour
 
         yield return StartCoroutine(PlayCloseLaptopAndPickPhoneAnimation());
 
-        ShowFirstCircle();
-        yield return new WaitForSeconds(0.5f);
-        ShowSecondCircle();
-        yield return new WaitForSeconds(0.5f);
-
-        ShowThoughtBubble();
-        yield return new WaitForSeconds(1f);
-        ShowThoughtText();
-        yield return new WaitForSeconds(3f);
-        HideThoughtBubbleAndText();
 
         yield return new WaitForSeconds(1f);
         Circle?.SetActive(true);
@@ -105,7 +98,6 @@ public class SecondPrologue : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        // Show Happiness Bar after text messages
         if (happinessBar != null) happinessBar.SetActive(true);
 
         yield return new WaitForSeconds(2f);
@@ -115,16 +107,21 @@ public class SecondPrologue : MonoBehaviour
         ShowSecondCircle();
         yield return new WaitForSeconds(0.5f);
         ShowThoughtBubbleWithAsset();
+        yield return new WaitForSeconds(0.5f);
+        ShowThoughtText();
         yield return new WaitForSeconds(10f);
 
-        circle1?.SetActive(false);
-        circle2?.SetActive(false);
-
+        // Corrected order: hide thought bubble and asset first
         HideThoughtBubbleAndText();
         thoughtAsset?.SetActive(false);
 
+        // THEN disable circles
+        circle1?.SetActive(false);
+        circle2?.SetActive(false);
+
         yield return new WaitForSeconds(3f);
 
+        if (shadowSpotlight != null) shadowSpotlight.SetActive(false);
         if (roomLight != null) roomLight.SetActive(false);
         if (spotlight != null) spotlight.SetActive(true);
         if (goToShoppingCenterSign != null) goToShoppingCenterSign.SetActive(true);
@@ -161,9 +158,12 @@ public class SecondPrologue : MonoBehaviour
     void ShowThoughtText() { if (thoughtBubbleText != null) thoughtBubbleText.SetActive(true); }
     void HideThoughtBubbleAndText()
     {
+        if (circle1 != null) circle1.SetActive(false);
+        if (circle2 != null) circle2.SetActive(false);
         if (thoughtBubble != null) thoughtBubble.SetActive(false);
         if (thoughtBubbleText != null) thoughtBubbleText.SetActive(false);
     }
+
     void ShowThoughtBubbleWithAsset()
     {
         if (thoughtBubble != null) thoughtBubble.SetActive(true);
