@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float wallSlidingSpeed = 2f;
     [SerializeField] private Transform wallCheck;
-    // [SerializeField] private wallLayer;
+    [SerializeField] private LayerMask mwallLayer;
 
 
     private void Awake()
