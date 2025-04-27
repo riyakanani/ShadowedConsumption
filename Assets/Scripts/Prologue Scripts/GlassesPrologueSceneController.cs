@@ -60,7 +60,7 @@ public class GlassesPrologueSceneController : MonoBehaviour
 
         // 3. Start Glitch
         if (glitchOverlay != null) glitchOverlay.SetActive(true);
-        StartCoroutine(CameraGlitchShake(glitchDuration, 0.1f));
+        StartCoroutine(CameraGlitchShake(glitchDuration, 3f));
         yield return new WaitForSeconds(glitchDuration);
 
         if (glitchOverlay != null) glitchOverlay.SetActive(false);
