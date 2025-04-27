@@ -23,7 +23,6 @@ public class GlassesPrologueSceneController : MonoBehaviour
     [Header("Glitch and Scene Transition")]
     public GameObject glitchOverlay; 
     public Image fadePanel; 
-    public string nextSceneName;
     public float glitchDuration = 2f;
     public float fadeDuration = 1f;
 
@@ -81,7 +80,7 @@ public class GlassesPrologueSceneController : MonoBehaviour
         yield return new WaitForSeconds(0.5f); // Pause 0.5 seconds on full black
 
         // 6. Load Boss Scene
-        SceneManager.LoadScene(nextSceneName);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     }
 

@@ -38,7 +38,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/Prologue2Ending.unity
     guid: 6088914417f9f424092520431dc446d3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/Nar Final boss.unity
     guid: 32197333556f84cc2a6a2dff728e34e1
   - enabled: 1
