@@ -24,7 +24,7 @@ public class GlassesPrologueSceneController : MonoBehaviour
     public GameObject glitchOverlay; 
     public Image fadePanel; 
     public string nextSceneName;
-    public float glitchDuration = 1f;
+    public float glitchDuration = 2f;
     public float fadeDuration = 1f;
 
     [Header("Timing")]
@@ -60,7 +60,7 @@ public class GlassesPrologueSceneController : MonoBehaviour
 
         // 3. Start Glitch
         if (glitchOverlay != null) glitchOverlay.SetActive(true);
-        StartCoroutine(CameraGlitchShake(glitchDuration, 3f));
+        StartCoroutine(CameraGlitchShake(glitchDuration, .05f));
         yield return new WaitForSeconds(glitchDuration);
 
         if (glitchOverlay != null) glitchOverlay.SetActive(false);
@@ -77,8 +77,12 @@ public class GlassesPrologueSceneController : MonoBehaviour
             }
         }
 
-        // 5. Load Boss Scene
+        // 5. Hold on black screen briefly
+        yield return new WaitForSeconds(0.5f); // Pause 0.5 seconds on full black
+
+        // 6. Load Boss Scene
         SceneManager.LoadScene(nextSceneName);
+
     }
 
     IEnumerator PlayGlassesAnimation()
@@ -99,8 +103,8 @@ public class GlassesPrologueSceneController : MonoBehaviour
         if (shadow == null) yield break;
 
         Vector3 originalScale = shadow.transform.localScale;
-        Vector3 targetScale = originalScale * 1.07f;
-        Vector3 overshootScale = targetScale * 1.04f;
+        Vector3 targetScale = originalScale * 1.2f;
+        Vector3 overshootScale = targetScale * 1.05f;
 
         float duration = shadowGrowDuration;
         float elapsed = 0f;
