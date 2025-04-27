@@ -9,11 +9,11 @@ public class GlassesPrologueSceneController : MonoBehaviour
 {
     [Header("Girl Trying On Glasses Animation")]
     [SerializeField] private List<GameObject> girlTryingOnGlassesFrames;
-    [SerializeField] private float frameInterval = 1f;
+    [SerializeField] private float frameInterval = 0.5f;
 
     [Header("Shadow Settings")]
     public GameObject shadow;
-    public float shadowGrowDuration = 0.5f;
+    public float shadowGrowDuration = 2f;
 
     [Header("Lighting and Spotlight")]
     public GameObject roomLight;
