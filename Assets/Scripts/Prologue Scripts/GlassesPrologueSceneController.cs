@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
-
 public class GlassesPrologueSceneController : MonoBehaviour
 {
     [Header("Girl Trying On Glasses Animation")]
@@ -13,6 +12,8 @@ public class GlassesPrologueSceneController : MonoBehaviour
 
     [Header("Shadow Settings")]
     public GameObject shadow;
+    [SerializeField] private List<GameObject> shadowMovementFrames;
+    [SerializeField] private float shadowFrameInterval = 0.5f;
     public float shadowGrowDuration = 2f;
 
     [Header("Lighting and Spotlight")]
@@ -21,8 +22,9 @@ public class GlassesPrologueSceneController : MonoBehaviour
     public GameObject shadowSpotlight;
 
     [Header("Glitch and Scene Transition")]
-    public GameObject glitchOverlay; 
-    public Image fadePanel; 
+    public GameObject glitchOverlay;
+    public Image fadePanel;
+    public string nextSceneName;
     public float glitchDuration = 2f;
     public float fadeDuration = 1f;
 
@@ -31,7 +33,6 @@ public class GlassesPrologueSceneController : MonoBehaviour
 
     void Start()
     {
-        
         if (glitchOverlay != null) glitchOverlay.SetActive(false);
         if (fadePanel != null) fadePanel.color = new Color(0, 0, 0, 0);
 
@@ -46,42 +47,35 @@ public class GlassesPrologueSceneController : MonoBehaviour
     {
         yield return new WaitForSeconds(startDelay);
 
-        
+        // 1. Play Girl Animation
         Coroutine glassesAnim = StartCoroutine(PlayGlassesAnimation());
         yield return glassesAnim;
 
         yield return new WaitForSeconds(1f);
 
+        // 2. Grow Shadow
         if (shadow != null)
             yield return StartCoroutine(GrowShadow());
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         // 3. Start Glitch
         if (glitchOverlay != null) glitchOverlay.SetActive(true);
-        StartCoroutine(CameraGlitchShake(glitchDuration, .05f));
+        StartCoroutine(CameraGlitchShake(glitchDuration, 0.05f));
         yield return new WaitForSeconds(glitchDuration);
 
         if (glitchOverlay != null) glitchOverlay.SetActive(false);
 
-        // 4. Fade to Black
-        if (fadePanel != null)
-        {
-            float t = 0f;
-            while (t < 1f)
-            {
-                t += Time.deltaTime / fadeDuration;
-                fadePanel.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, t));
-                yield return null;
-            }
-        }
+        yield return new WaitForSeconds(0.5f);
 
-        // 5. Hold on black screen briefly
-        yield return new WaitForSeconds(0.5f); // Pause 0.5 seconds on full black
+        // 4. After glitch, shadow separates/moves
+        if (shadowMovementFrames != null && shadowMovementFrames.Count > 0)
+            yield return StartCoroutine(PlayShadowMovementAnimation());
 
-        // 6. Load Boss Scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        yield return new WaitForSeconds(0.5f);
 
+        // 7. Load Boss Scene
+        SceneManager.LoadScene(nextSceneName);
     }
 
     IEnumerator PlayGlassesAnimation()
@@ -128,6 +122,22 @@ public class GlassesPrologueSceneController : MonoBehaviour
         shadow.transform.localScale = targetScale;
     }
 
+    IEnumerator PlayShadowMovementAnimation()
+    {
+        if (shadow != null)
+            shadow.SetActive(false); // Disable the big original shadow when movement starts
+
+        foreach (var frame in shadowMovementFrames)
+            frame.SetActive(false);
+
+        for (int i = 0; i < shadowMovementFrames.Count; i++)
+        {
+            shadowMovementFrames[i].SetActive(true);
+            if (i > 0) shadowMovementFrames[i - 1].SetActive(false);
+            yield return new WaitForSeconds(shadowFrameInterval);
+        }
+    }
+
     IEnumerator CameraGlitchShake(float duration, float magnitude)
     {
         Vector3 originalPos = Camera.main.transform.localPosition;
@@ -147,4 +157,3 @@ public class GlassesPrologueSceneController : MonoBehaviour
         Camera.main.transform.localPosition = originalPos;
     }
 }
-
