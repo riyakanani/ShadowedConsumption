@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private float jumpPower;
+    [SerializeField] private float jumpPower = 18f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
 
@@ -19,11 +19,6 @@ public class PlayerMovement : MonoBehaviour
 
     private float wallJumpCooldown;
     private float horizontalInput;
-
-    private float wallSlidingSpeed = 2f;
-    [SerializeField] private Transform wallCheck;
-    [SerializeField] private LayerMask mwallLayer;
-
 
     private void Awake()
     {
@@ -80,12 +75,12 @@ public class PlayerMovement : MonoBehaviour
                 // Handle wall slide
                 if (onWall() && !isGrounded())
                 {
-                    body.gravityScale = 0;
-                    body.velocity = Vector2.zero;
+                    body.gravityScale = 1; // Light gravity for sliding down the wall
+                     body.velocity = new Vector2(body.velocity.x, Mathf.Max(body.velocity.y, -3f)); // Limit fall speed
                 }
                 else
                 {
-                    body.gravityScale = 5;
+                    body.gravityScale = 5; // Normal gravity
                 }
             }
         }
