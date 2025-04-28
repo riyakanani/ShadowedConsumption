@@ -75,7 +75,7 @@ public class GlassesPrologueSceneController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         // 7. Load Boss Scene
-        SceneManager.LoadScene(nextSceneName);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     IEnumerator PlayGlassesAnimation()

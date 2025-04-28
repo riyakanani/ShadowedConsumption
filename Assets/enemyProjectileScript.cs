@@ -31,7 +31,7 @@ public class enemyProjectileScript : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if(timer > 10){
+        if(timer > 5){
             Destroy(gameObject);
         }
     }
@@ -40,6 +40,8 @@ public class enemyProjectileScript : MonoBehaviour
         if(collision.gameObject.CompareTag("Player")){
             Debug.Log("collided");
             collision.GetComponent<Health>().TakeDamage(damage);
+            Destroy(gameObject);
+        } else if (collision.gameObject.CompareTag("Platform")){
             Destroy(gameObject);
         }
     }

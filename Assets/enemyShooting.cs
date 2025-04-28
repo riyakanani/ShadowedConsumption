@@ -41,7 +41,7 @@ public class enemyShooting : MonoBehaviour
         enemy.transform.localScale = newScale;
 
         // Check if any scale component is less than 0.5
-        if (newScale.x < 0.5f || newScale.y < 0.5f || newScale.z < 0.5f) {
+        if (Mathf.Abs(newScale.x) < 0.5f || Mathf.Abs(newScale.y) < 0.5f || Mathf.Abs(newScale.z) < 0.5f) {
             Destroy(transform.parent.gameObject); // Destroy the enemy if any scale is below 0.5
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 

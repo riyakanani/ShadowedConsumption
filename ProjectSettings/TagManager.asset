@@ -9,6 +9,7 @@ TagManager:
   - Platform
   - HealthCollectable
   - x
+  - Enemy
   layers:
   - Default
   - TransparentFX

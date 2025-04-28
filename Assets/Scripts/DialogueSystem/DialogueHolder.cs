@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro; // Import the TextMeshPro namespace
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace DialogueSystem {
     public class DialogueHolder : MonoBehaviour
@@ -37,6 +38,10 @@ namespace DialogueSystem {
             Circle.SetActive(false);
             X.SetActive(false);
             gameObject.SetActive(false);
+            if (SceneManager.GetActiveScene().name == "EndingMessage")
+            {
+                SceneManager.LoadScene(0); // or whatever scene you want to load next
+            }
         }
 
         //sets other lines to inactive
