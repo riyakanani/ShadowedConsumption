@@ -27,33 +27,29 @@ public class SceneSequenceController : MonoBehaviour
     [SerializeField] private float frameInterval = 1f;
 
     public GameObject thoughtBubble;
-    public GameObject chipsAsset;
     public GameObject thoughtBubbleText;
+    public GameObject secondThoughtText;
+    public GameObject chipsAsset;
     public GameObject chipsText;
 
     public GameObject circle1;
     public GameObject circle2;
 
+    public GameObject shadowCircle1;
+    public GameObject shadowCircle2;
+    public GameObject shadowThoughtBubble;
+    public GameObject shadowThoughtText1;
+    public GameObject shadowThoughtText2;
+
     public GameObject sparklingLines;
-
-    //void Awake()
-    //{
-    //    foreach (var frame in girlBookReadingFrames)
-    //        frame.SetActive(false);
-
-    //    if (girlBookReadingFrames.Count > 0)
-    //        girlBookReadingFrames[0].SetActive(true);
-
-    //    foreach (var frame in girlBookFrames)
-    //        frame.SetActive(false);
-    //}
+    public List<GameObject> clutterObjects;
 
     void Start()
     {
         if (backgroundMusic != null)
         {
             backgroundMusic.loop = true;
-            backgroundMusic.volume = 0.2f; // Adjust this as needed
+            backgroundMusic.volume = 0.2f;
             backgroundMusic.Play();
         }
 
@@ -62,6 +58,14 @@ public class SceneSequenceController : MonoBehaviour
         textBubble.SetActive(false);
         thoughtBubble.SetActive(false);
         chipsAsset.SetActive(false);
+
+        if (thoughtBubbleText != null) thoughtBubbleText.SetActive(false);
+        if (secondThoughtText != null) secondThoughtText.SetActive(false);
+        if (shadowThoughtBubble != null) shadowThoughtBubble.SetActive(false);
+        if (shadowThoughtText1 != null) shadowThoughtText1.SetActive(false);
+        if (shadowThoughtText2 != null) shadowThoughtText2.SetActive(false);
+
+        foreach (var obj in clutterObjects) obj.SetActive(false);
 
         if (pageTurningSound != null)
         {
@@ -74,58 +78,79 @@ public class SceneSequenceController : MonoBehaviour
 
     IEnumerator RunSequence()
     {
-        yield return new WaitForSeconds(.5f);
-
+        yield return new WaitForSeconds(0.5f);
         yield return StartCoroutine(PlayReadingAnimation());
 
+        // Girl’s first thought
         ShowFirstCircle();
         yield return new WaitForSeconds(0.5f);
         ShowSecondCircle();
         yield return new WaitForSeconds(0.5f);
         ShowThoughtBubble();
         yield return new WaitForSeconds(1f);
-        ShowThoughtText(thoughtBubbleText);
+        ShowThoughtText(thoughtBubbleText, "This book is so good");
         yield return new WaitForSeconds(3f);
-        HideThoughtBubbleAndText(thoughtBubbleText);
+        HideThoughtBubbleAndText();
 
+        // Phone rings
         if (pageTurningSound != null) pageTurningSound.Stop();
         if (phoneRingSound != null) phoneRingSound.Play();
-
         yield return new WaitForSeconds(1f);
 
+        // Girl puts book down
         StartCoroutine(PlayGirlPuttingBookDown());
         yield return new WaitForSeconds(frameInterval * (girlBookFrames.Count - 1) + 0.5f);
 
+        // Text messages
         yield return new WaitForSeconds(1f);
         Circle.gameObject.SetActive(true);
         X.gameObject.SetActive(true);
         textBubble.SetActive(true);
         yield return new WaitUntil(() => !textBubble.activeSelf);
 
+        // Happiness bar
         yield return new WaitForSeconds(2f);
         happinessBar.SetActive(true);
         yield return new WaitForSeconds(2f);
 
+        // Girl’s second thought
+        ShowFirstCircle();
+        yield return new WaitForSeconds(0.5f);
+        ShowSecondCircle();
+        yield return new WaitForSeconds(0.5f);
+        ShowThoughtBubble();
+        yield return new WaitForSeconds(1f);
+        ShowThoughtText(secondThoughtText, "I don't really need any more snacks... I already have so many.");
+        yield return new WaitForSeconds(3f);
+        HideThoughtBubbleAndText();
+
+        // Shadow’s thought
+        ShowShadowFirstCircle();
+        yield return new WaitForSeconds(0.5f);
+        ShowShadowSecondCircle();
+        yield return new WaitForSeconds(0.5f);
+        yield return StartCoroutine(ShowShadowThoughtSequence());
+
+        // Chips scene
         ShowFirstCircle();
         yield return new WaitForSeconds(0.5f);
         ShowSecondCircle();
         yield return new WaitForSeconds(0.5f);
         ShowThoughtBubbleWithChips();
         yield return new WaitForSeconds(10f);
-        //TriggerArmMovement();
 
         if (circle1 != null) circle1.SetActive(false);
         if (circle2 != null) circle2.SetActive(false);
 
-        HideThoughtBubbleAndText(chipsText);
+        HideThoughtBubbleAndText();
         if (chipsAsset != null) chipsAsset.SetActive(false);
         if (chipsText != null) chipsText.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(3f);
+        StartCoroutine(ShowClutterGradually());
 
         if (shadowSpotlight != null) shadowSpotlight.SetActive(false);
         if (roomLight != null) roomLight.SetActive(false);
-
         if (goToGroceryStoreSign != null) goToGroceryStoreSign.SetActive(true);
         if (spotlightOnGroceryStore != null) spotlightOnGroceryStore.SetActive(true);
     }
@@ -133,10 +158,7 @@ public class SceneSequenceController : MonoBehaviour
     IEnumerator PlayGirlPuttingBookDown()
     {
         foreach (var frame in girlBookReadingFrames)
-        {
             frame.SetActive(false);
-        }
-
 
         for (int i = 1; i < girlBookFrames.Count; i++)
         {
@@ -148,16 +170,11 @@ public class SceneSequenceController : MonoBehaviour
 
     IEnumerator PlayReadingAnimation()
     {
-        // Disable all reading frames just in case
         foreach (var frame in girlBookReadingFrames)
-        {
             frame.SetActive(false);
-        }
 
         if (girlBookReadingFrames.Count > 0)
-        {
-            girlBookReadingFrames[0].SetActive(true); // Start from the first frame
-        }
+            girlBookReadingFrames[0].SetActive(true);
 
         yield return new WaitForSeconds(readingFrameInterval);
 
@@ -169,47 +186,33 @@ public class SceneSequenceController : MonoBehaviour
         }
     }
 
-
-    void ShowSparklingLines() { if (sparklingLines != null) sparklingLines.SetActive(true); }
-    void HideSparklingLines() { if (sparklingLines != null) sparklingLines.SetActive(false); }
     void ShowFirstCircle() { if (circle1 != null) circle1.SetActive(true); }
     void ShowSecondCircle() { if (circle2 != null) circle2.SetActive(true); }
     void ShowThoughtBubble() { if (thoughtBubble != null) thoughtBubble.SetActive(true); }
-    void ShowThoughtText(GameObject textHolder) { if (textHolder != null) textHolder.SetActive(true); }
 
-    void HideThoughtBubbleAndText(GameObject textHolder)
+    void ShowThoughtText(GameObject textObj, string message)
     {
+        if (textObj != null && textObj.GetComponent<TextMeshProUGUI>() != null)
+        {
+            var tmp = textObj.GetComponent<TextMeshProUGUI>();
+            tmp.text = message;
+            textObj.SetActive(true);
+        }
+    }
+
+    void HideThoughtBubbleAndText()
+    {
+        // Girl's
         if (circle1 != null) circle1.SetActive(false);
         if (circle2 != null) circle2.SetActive(false);
+        if (thoughtBubbleText != null) thoughtBubbleText.SetActive(false);
+        if (secondThoughtText != null) secondThoughtText.SetActive(false);
         if (thoughtBubble != null) thoughtBubble.SetActive(false);
-        if (textHolder != null) textHolder.SetActive(false);
-    }
 
-    void ShowTextMessage1(string message)
-    {
-        if (textMessage1 != null && textBubble != null)
-        {
-            textMessage1.text = message;
-            textMessage1.gameObject.SetActive(true);
-            textBubble.SetActive(true);
-        }
-    }
-
-    void ShowTextMessage2(string message)
-    {
-        if (textMessage1 != null) textMessage1.gameObject.SetActive(false);
-        if (textMessage2 != null)
-        {
-            textMessage2.text = message;
-            textMessage2.gameObject.SetActive(true);
-        }
-    }
-
-    void HideTextAndBubble()
-    {
-        if (textMessage1 != null) textMessage1.gameObject.SetActive(false);
-        if (textMessage2 != null) textMessage2.gameObject.SetActive(false);
-        if (textBubble != null) textBubble.SetActive(false);
+        // Shadow's
+        if (shadowThoughtText1 != null) shadowThoughtText1.SetActive(false);
+        if (shadowThoughtText2 != null) shadowThoughtText2.SetActive(false);
+        if (shadowThoughtBubble != null) shadowThoughtBubble.SetActive(false);
     }
 
     void ShowThoughtBubbleWithChips()
@@ -226,18 +229,35 @@ public class SceneSequenceController : MonoBehaviour
         if (chipsAsset != null) chipsAsset.SetActive(true);
         yield return new WaitForSeconds(1f);
         ShowSparklingLines();
-        TriggerArmMovement();
+        StartCoroutine(DelayedArmReach());
+        StartCoroutine(GrowShadowOverTime());
     }
 
-    void TriggerArmMovement()
+    IEnumerator DelayedArmReach()
     {
-        if (shadowArmsReaching != null)
-        {
-            shadowArmsReaching.SetActive(true);
-        }
-
+        yield return new WaitForSeconds(0.3f);
+        if (shadowArmsReaching != null) shadowArmsReaching.SetActive(true);
         if (shadow != null) shadow.SetActive(false);
         StartCoroutine(StopSparklesAfterAnimation());
+    }
+
+    IEnumerator GrowShadowOverTime()
+    {
+        if (shadow != null)
+        {
+            Vector3 originalScale = shadow.transform.localScale;
+            Vector3 targetScale = originalScale * 1.5f;
+            float duration = 2f;
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                shadow.transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsed / duration);
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+            shadow.transform.localScale = targetScale;
+        }
     }
 
     IEnumerator StopSparklesAfterAnimation()
@@ -245,4 +265,48 @@ public class SceneSequenceController : MonoBehaviour
         yield return new WaitForSeconds(4f);
         HideSparklingLines();
     }
+
+    IEnumerator ShowClutterGradually()
+    {
+        foreach (var obj in clutterObjects)
+        {
+            obj.SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
+
+    IEnumerator ShowShadowThoughtSequence()
+    {
+        if (shadowThoughtBubble != null) shadowThoughtBubble.SetActive(true);
+
+        if (shadowThoughtText1 != null) shadowThoughtText1.SetActive(true);
+        yield return new WaitForSeconds(2f);
+
+        if (shadowThoughtText1 != null) shadowThoughtText1.SetActive(false);
+        if (shadowThoughtText2 != null) shadowThoughtText2.SetActive(true);
+        yield return new WaitForSeconds(2f);
+
+        if (shadowThoughtText2 != null) shadowThoughtText2.SetActive(false);
+        if (shadowThoughtBubble != null) shadowThoughtBubble.SetActive(false);
+
+        // ✅ Disable shadow circles when the thought ends
+        if (shadowCircle1 != null) shadowCircle1.SetActive(false);
+        if (shadowCircle2 != null) shadowCircle2.SetActive(false);
+    }
+
+    void ShowShadowFirstCircle() { if (shadowCircle1 != null) shadowCircle1.SetActive(true); }
+    void ShowShadowSecondCircle() { if (shadowCircle2 != null) shadowCircle2.SetActive(true); }
+
+    void ShowSparklingLines()
+    {
+        if (sparklingLines != null)
+            sparklingLines.SetActive(true);
+    }
+
+    void HideSparklingLines()
+    {
+        if (sparklingLines != null)
+            sparklingLines.SetActive(false);
+    }
 }
+

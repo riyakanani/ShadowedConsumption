@@ -175,3 +175,4 @@ public class FinalPrologueSceneController : MonoBehaviour
         circle3?.SetActive(false);
     }
 }
+
