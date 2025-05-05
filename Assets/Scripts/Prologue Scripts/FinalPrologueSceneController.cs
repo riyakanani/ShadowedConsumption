@@ -35,6 +35,15 @@ public class FinalPrologueSceneController : MonoBehaviour
     [Header("Timing")]
     public float thoughtBubbleStartDelay = 0.5f;
 
+    public GameObject shadowThoughtBubble;
+    public TextMeshProUGUI shadowThoughtText;
+    public GameObject shadowCircle1;
+    public GameObject shadowCircle2;
+    public GameObject shadowCircle3;
+    public GameObject morphedShadow;
+
+
+
     void Start()
     {
         // Reset all objects
@@ -61,16 +70,26 @@ public class FinalPrologueSceneController : MonoBehaviour
 
         yield return chipAnim;
         yield return bubbleSequence;
+        yield return new WaitForSeconds(2f);
 
-        yield return new WaitForSeconds(1f);
 
         if (shadow != null)
             yield return StartCoroutine(GrowShadow());
 
-        yield return new WaitForSeconds(1.5f);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
+
+        Coroutine shadowBubbleSequence = StartCoroutine(PlayShadowThoughtSequence());
 
         HideThoughtBubbleAndCircles();
+
+        yield return shadowBubbleSequence;
+
+        yield return new WaitForSeconds(2f);
+
+        HideShadowThoughtBubbleAndCircles();
+
+
+
 
         if (happinessSlider != null)
         {
@@ -125,41 +144,105 @@ public class FinalPrologueSceneController : MonoBehaviour
 
         if (thoughtBubbleText != null)
         {
-            thoughtBubbleText.text = "These chips are yummy";
+            thoughtBubbleText.text = "These chips are yummy but I spent a lot and these snacks are going to waste. I won't buy this many things next time. ";
             thoughtBubbleText.gameObject.SetActive(true);
+        }
+    }
+
+    IEnumerator PlayShadowThoughtSequence()
+    {
+        shadowThoughtBubble?.SetActive(true);
+
+        ShowCircle(shadowCircle1);
+        yield return new WaitForSeconds(0.5f);
+        ShowCircle(shadowCircle2);
+        yield return new WaitForSeconds(0.5f);
+        ShowCircle(shadowCircle3);
+        yield return new WaitForSeconds(0.5f);
+
+        if (shadowThoughtText != null)
+        {
+            shadowThoughtText.text = "No Let's get more stuff...";
+            shadowThoughtText.gameObject.SetActive(true);
         }
     }
 
     IEnumerator GrowShadow()
     {
-        if (shadow == null) yield break;
+        if (shadow == null || morphedShadow == null) yield break;
 
+        // Step 1: Disable original, enable morphed in same position & original scale
         Vector3 originalScale = shadow.transform.localScale;
-        Vector3 targetScale = originalScale * 1.07f; // slightly more than before
-        Vector3 overshootScale = targetScale * 1.04f; // subtle bounce above target
+        morphedShadow.transform.position = shadow.transform.position;
+        morphedShadow.transform.localScale = originalScale;
+
+        shadow.SetActive(false);
+        morphedShadow.SetActive(true);
+
+        // Step 2: Wait before growth begins
+        yield return new WaitForSeconds(0.5f); // Adjust delay as needed
+
+        // Step 3: Animate growth (with anticipation stretch and settle)
+        Vector3 targetScale = originalScale * 1.2f;
+        Vector3 overshootScale = targetScale * 1.05f;
 
         float duration = shadowGrowDuration;
         float elapsed = 0f;
 
-        // Phase 1: grow to overshoot
+        // Phase 1: Grow to overshoot
         while (elapsed < duration * 0.5f)
         {
             elapsed += Time.deltaTime;
-            shadow.transform.localScale = Vector3.Lerp(originalScale, overshootScale, elapsed / (duration * 0.5f));
+            morphedShadow.transform.localScale = Vector3.Lerp(originalScale, overshootScale, elapsed / (duration * 0.5f));
             yield return null;
         }
 
-        // Phase 2: settle back to final size
+        // Phase 2: Settle back to final size
         elapsed = 0f;
         while (elapsed < duration * 0.5f)
         {
             elapsed += Time.deltaTime;
-            shadow.transform.localScale = Vector3.Lerp(overshootScale, targetScale, elapsed / (duration * 0.5f));
+            morphedShadow.transform.localScale = Vector3.Lerp(overshootScale, targetScale, elapsed / (duration * 0.5f));
             yield return null;
         }
 
-        shadow.transform.localScale = targetScale;
+        morphedShadow.transform.localScale = targetScale;
     }
+
+
+
+
+
+    //IEnumerator GrowShadow()
+    //{
+    //    if (shadow == null) yield break;
+
+    //    Vector3 originalScale = shadow.transform.localScale;
+    //    Vector3 targetScale = originalScale * 1.07f; // slightly more than before
+    //    Vector3 overshootScale = targetScale * 1.04f; // subtle bounce above target
+
+    //    float duration = shadowGrowDuration;
+    //    float elapsed = 0f;
+
+    //    // Phase 1: grow to overshoot
+    //    while (elapsed < duration * 0.5f)
+    //    {
+    //        elapsed += Time.deltaTime;
+    //        shadow.transform.localScale = Vector3.Lerp(originalScale, overshootScale, elapsed / (duration * 0.5f));
+    //        yield return null;
+    //    }
+
+    //    // Phase 2: settle back to final size
+    //    elapsed = 0f;
+    //    while (elapsed < duration * 0.5f)
+    //    {
+    //        elapsed += Time.deltaTime;
+    //        shadow.transform.localScale = Vector3.Lerp(overshootScale, targetScale, elapsed / (duration * 0.5f));
+    //        yield return null;
+    //    }
+
+    //    shadow.transform.localScale = targetScale;
+    //}
 
     void ShowCircle(GameObject circle)
     {
@@ -174,5 +257,16 @@ public class FinalPrologueSceneController : MonoBehaviour
         circle2?.SetActive(false);
         circle3?.SetActive(false);
     }
+
+    void HideShadowThoughtBubbleAndCircles()
+    {
+        shadowThoughtBubble?.SetActive(false);
+        shadowThoughtText?.gameObject.SetActive(false);
+        shadowCircle1?.SetActive(false);
+        shadowCircle2?.SetActive(false);
+        shadowCircle3?.SetActive(false);
+    }
+
+
 }
 
