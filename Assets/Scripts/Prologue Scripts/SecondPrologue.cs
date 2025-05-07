@@ -27,6 +27,7 @@ public class SecondPrologue : MonoBehaviour
 
     public GameObject shadowArmsReaching;
     public GameObject shadow;
+    public float shadowGrowDuration = 0.5f;
 
     [SerializeField] private GameObject Circle;
     [SerializeField] private GameObject X;
@@ -35,6 +36,13 @@ public class SecondPrologue : MonoBehaviour
     public GameObject sparklingLines;
 
     public GameObject happinessBar;
+
+    public GameObject shadowThoughtBubble;
+    public TextMeshProUGUI shadowThoughtText;
+    public GameObject shadowCircle1;
+    public GameObject shadowCircle2;
+    public GameObject shadowCircle3;
+    public GameObject morphedShadow;
 
     void Start()
     {
@@ -119,6 +127,25 @@ public class SecondPrologue : MonoBehaviour
         circle1?.SetActive(false);
         circle2?.SetActive(false);
 
+        yield return new WaitForSeconds(1f);
+
+        if (shadow != null)
+            yield return StartCoroutine(GrowShadow());
+
+        yield return new WaitForSeconds(2f);
+
+        Coroutine shadowBubbleSequence = StartCoroutine(PlayShadowThoughtSequence());
+
+        HideThoughtBubbleAndText();
+
+        yield return shadowBubbleSequence;
+
+        yield return new WaitForSeconds(2f);
+
+        HideShadowThoughtBubbleAndCircles();
+
+
+
         yield return new WaitForSeconds(3f);
 
         if (shadowSpotlight != null) shadowSpotlight.SetActive(false);
@@ -198,4 +225,81 @@ public class SecondPrologue : MonoBehaviour
         yield return new WaitForSeconds(4f);
         if (sparklingLines != null) sparklingLines.SetActive(false);
     }
+
+
+    IEnumerator GrowShadow()
+    {
+        if (shadow == null || morphedShadow == null) yield break;
+
+        // Step 1: Disable original, enable morphed in same position & original scale
+        Vector3 originalScale = shadow.transform.localScale;
+        morphedShadow.transform.position = shadow.transform.position;
+        morphedShadow.transform.localScale = originalScale;
+
+        shadow.SetActive(false);
+        morphedShadow.SetActive(true);
+
+        // Step 2: Wait before growth begins
+        yield return new WaitForSeconds(0.5f); // Adjust delay as needed
+
+        // Step 3: Animate growth (with anticipation stretch and settle)
+        Vector3 targetScale = originalScale * 1.2f;
+        Vector3 overshootScale = targetScale * 1.05f;
+
+        float duration = shadowGrowDuration;
+        float elapsed = 0f;
+
+        // Phase 1: Grow to overshoot
+        while (elapsed < duration * 0.5f)
+        {
+            elapsed += Time.deltaTime;
+            morphedShadow.transform.localScale = Vector3.Lerp(originalScale, overshootScale, elapsed / (duration * 0.5f));
+            yield return null;
+        }
+
+        // Phase 2: Settle back to final size
+        elapsed = 0f;
+        while (elapsed < duration * 0.5f)
+        {
+            elapsed += Time.deltaTime;
+            morphedShadow.transform.localScale = Vector3.Lerp(overshootScale, targetScale, elapsed / (duration * 0.5f));
+            yield return null;
+        }
+
+        morphedShadow.transform.localScale = targetScale;
+    }
+
+
+    void HideShadowThoughtBubbleAndCircles()
+    {
+        shadowThoughtBubble?.SetActive(false);
+        shadowThoughtText?.gameObject.SetActive(false);
+        shadowCircle1?.SetActive(false);
+        shadowCircle2?.SetActive(false);
+        shadowCircle3?.SetActive(false);
+    }
+
+    IEnumerator PlayShadowThoughtSequence()
+    {
+        shadowThoughtBubble?.SetActive(true);
+
+        ShowCircle(shadowCircle1);
+        yield return new WaitForSeconds(0.5f);
+        ShowCircle(shadowCircle2);
+        yield return new WaitForSeconds(0.5f);
+        ShowCircle(shadowCircle3);
+        yield return new WaitForSeconds(0.5f);
+
+        if (shadowThoughtText != null)
+        {
+            shadowThoughtText.text = "No Let's get more stuff...";
+            shadowThoughtText.gameObject.SetActive(true);
+        }
+    }
+
+    void ShowCircle(GameObject circle)
+    {
+        if (circle != null) circle.SetActive(true);
+    }
+
 }
