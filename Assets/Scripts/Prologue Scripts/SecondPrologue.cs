@@ -43,6 +43,7 @@ public class SecondPrologue : MonoBehaviour
     public GameObject shadowCircle2;
     public GameObject shadowCircle3;
     public GameObject morphedShadow;
+    public GameObject thoughtBubbleTextTwo;
 
     void Start()
     {
@@ -114,10 +115,10 @@ public class SecondPrologue : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         ShowSecondCircle();
         yield return new WaitForSeconds(0.5f);
-        ShowThoughtBubbleWithAsset();
+        ShowThoughtBubble();
         yield return new WaitForSeconds(0.5f);
         ShowThoughtText();
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(3f);
 
         // Corrected order: hide thought bubble and asset first
         HideThoughtBubbleAndText();
@@ -127,10 +128,9 @@ public class SecondPrologue : MonoBehaviour
         circle1?.SetActive(false);
         circle2?.SetActive(false);
 
-        yield return new WaitForSeconds(1f);
+      //  yield return new WaitForSeconds(1f);
 
-        if (shadow != null)
-            yield return StartCoroutine(GrowShadow());
+        
 
         yield return new WaitForSeconds(2f);
 
@@ -144,7 +144,27 @@ public class SecondPrologue : MonoBehaviour
 
         HideShadowThoughtBubbleAndCircles();
 
+        yield return new WaitForSeconds(2f);
 
+        ShowFirstCircle();
+        yield return new WaitForSeconds(0.5f);
+        ShowSecondCircle();
+        yield return new WaitForSeconds(0.5f);
+        ShowThoughtBubbleWithAsset();
+        yield return new WaitForSeconds(0.5f);
+        ShowThoughtTextTwo();
+        yield return new WaitForSeconds(10f);
+
+        if (shadow != null)
+            yield return StartCoroutine(GrowShadow());
+
+        // Corrected order: hide thought bubble and asset first
+        HideThoughtBubbleAndText();
+        thoughtAsset?.SetActive(false);
+
+        // THEN disable circles
+        circle1?.SetActive(false);
+        circle2?.SetActive(false);
 
         yield return new WaitForSeconds(3f);
 
@@ -183,12 +203,15 @@ public class SecondPrologue : MonoBehaviour
     void ShowSecondCircle() { if (circle2 != null) circle2.SetActive(true); }
     void ShowThoughtBubble() { if (thoughtBubble != null) thoughtBubble.SetActive(true); }
     void ShowThoughtText() { if (thoughtBubbleText != null) thoughtBubbleText.SetActive(true); }
+    void ShowThoughtTextTwo() { if (thoughtBubbleTextTwo != null) thoughtBubbleTextTwo.SetActive(true); }
+
     void HideThoughtBubbleAndText()
     {
         if (circle1 != null) circle1.SetActive(false);
         if (circle2 != null) circle2.SetActive(false);
         if (thoughtBubble != null) thoughtBubble.SetActive(false);
         if (thoughtBubbleText != null) thoughtBubbleText.SetActive(false);
+        if (thoughtBubbleTextTwo != null) thoughtBubbleTextTwo.SetActive(false);
     }
 
     void ShowThoughtBubbleWithAsset()
@@ -292,7 +315,7 @@ public class SecondPrologue : MonoBehaviour
 
         if (shadowThoughtText != null)
         {
-            shadowThoughtText.text = "No Let's get more stuff...";
+            shadowThoughtText.text = "No No No We must go";
             shadowThoughtText.gameObject.SetActive(true);
         }
     }
