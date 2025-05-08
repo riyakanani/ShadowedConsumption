@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private bool startFacingLeft = false; // Set this in the Inspector per scene
     [SerializeField] private float jumpPower = 18f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
@@ -27,6 +28,16 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
+
+        if (startFacingLeft)
+        {
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else
+        {
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+
     }
 
     private void Update()
@@ -78,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
                 if (onWall() && !isGrounded())
                 {
                     body.gravityScale = 1; // Light gravity for sliding down the wall
-                     body.velocity = new Vector2(body.velocity.x, Mathf.Max(body.velocity.y, -3f)); // Limit fall speed
+                    body.velocity = new Vector2(body.velocity.x, Mathf.Max(body.velocity.y, -3f)); // Limit fall speed
                 }
                 else
                 {
