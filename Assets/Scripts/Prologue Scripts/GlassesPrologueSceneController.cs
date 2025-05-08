@@ -9,10 +9,21 @@ public class GlassesPrologueSceneController : MonoBehaviour
     [Header("Girl Trying On Glasses Animation")]
     [SerializeField] private List<GameObject> girlTryingOnGlassesFrames;
     [SerializeField] private float frameInterval = 0.5f;
+    public GameObject whiteLight;
+
+    [Header("Audio")]
+    public AudioSource monsterGrowlSound;
 
     [Header("Thought Sequences")]
     public List<GameObject> shadowThoughtCircles; // 3 circles
     public List<GameObject> shadowThoughtCircles2; // 3 circles
+    public List<GameObject> shadowThoughtCircles3; // 3 circles
+
+    [Header("Lighting Switch and Background")]
+    public GameObject lightSwitchOff;
+    public GameObject lightSwitchOn;
+    public GameObject whiteBackground;
+
 
     public List<GameObject> girlThoughtCircles1;
     public List<GameObject> girlThoughtCircles2;
@@ -21,6 +32,8 @@ public class GlassesPrologueSceneController : MonoBehaviour
 
 
     public GameObject shadowThoughtText;
+    public GameObject shadowThoughtText3;
+
     public GameObject girlThoughtText1;
     public GameObject girlThoughtText2;
     public GameObject shadowMonsterThoughtText;
@@ -87,13 +100,14 @@ public class GlassesPrologueSceneController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         yield return StartCoroutine(PlayThoughtSequence(shadowThoughtCircles, shadowThoughtText, "YES YES YES let's go back to the store and buy more"));
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
         yield return StartCoroutine(PlayThoughtSequence(girlThoughtCircles1, girlThoughtText1, "No we don't need anything more"));
 
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(PlayShadowMovementAnimation());
         StartCoroutine(PlayGirlDraggingAnimation());
 
+        yield return new WaitForSeconds(1f);
         yield return StartCoroutine(PlayThoughtSequence(shadowThoughtCircles2, shadowThoughtText2, "No we are going"));
 
 
@@ -102,15 +116,21 @@ public class GlassesPrologueSceneController : MonoBehaviour
 
         yield return StartCoroutine(PlayGirlCuttingAnimation());
         yield return new WaitForSeconds(1f);
-        yield return StartCoroutine(PlayShadowVillainAnimation());
-
-        yield return StartCoroutine(PlayThoughtSequence(shadowMonsterThoughtCircles, shadowMonsterThoughtText, "Then Let's fight!"));
 
         yield return StartCoroutine(PlayGirlGetUpAnimation());
         if (girlGetUpFrames.Count > 0)
             girlGetUpFrames[girlGetUpFrames.Count - 1].SetActive(false);
         if (girlFightFrame != null) girlFightFrame.SetActive(true);
-      
+
+        yield return new WaitForSeconds(1f);
+
+        yield return StartCoroutine(PlayShadowVillainAnimation());
+
+        yield return new WaitForSeconds(1f);
+
+        yield return StartCoroutine(PlayThoughtSequence(shadowThoughtCircles3, shadowThoughtText3, "Then Let's fight!"));
+
+       
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
@@ -223,20 +243,39 @@ public class GlassesPrologueSceneController : MonoBehaviour
 
     IEnumerator PlayShadowVillainAnimation()
     {
+        // Play growl sound
+        if (monsterGrowlSound != null) monsterGrowlSound.Play();
+
+        // Hide last movement frame
         if (shadowMovementFrames.Count > 0)
             shadowMovementFrames[shadowMovementFrames.Count - 1].SetActive(false);
 
-        foreach (var frame in shadowVillainFrames) frame.SetActive(false);
+        // Hide all villain frames
+        foreach (var frame in shadowVillainFrames)
+            frame.SetActive(false);
 
+        // Play villain animation frames
         for (int i = 0; i < shadowVillainFrames.Count; i++)
         {
             shadowVillainFrames[i].SetActive(true);
             if (i > 0) shadowVillainFrames[i - 1].SetActive(false);
+
+            if (i == 1)
+            {
+                if (lightSwitchOff != null) lightSwitchOff.SetActive(false);
+                if (lightSwitchOn != null) lightSwitchOn.SetActive(true);
+                if (whiteBackground != null) whiteBackground.SetActive(true);
+                if (whiteLight != null) whiteLight.SetActive(true);
+                if (emptyChair != null) emptyChair.SetActive(false);
+                if (shadowSpotlight != null) shadowSpotlight.SetActive(false);
+            }
+
             yield return new WaitForSeconds(shadowFrameInterval);
         }
-
-       
     }
+
+
+
 
     IEnumerator PlayThoughtSequence(List<GameObject> circles, GameObject textBox, string text)
     {
@@ -260,7 +299,7 @@ public class GlassesPrologueSceneController : MonoBehaviour
         if (textBox != null)
             textBox.SetActive(true);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3f);
 
         // Hide bubbles and text after the delay
         foreach (var circle in circles) circle.SetActive(false);

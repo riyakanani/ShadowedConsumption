@@ -5720,7 +5720,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1708108606}
-  - component: {fileID: 1708108607}
+  - component: {fileID: 1708108608}
   m_Layer: 0
   m_Name: GlitchManager
   m_TagString: Untagged
@@ -5743,7 +5743,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1708108607
+--- !u!114 &1708108608
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5763,13 +5763,13 @@ MonoBehaviour:
   backgroundMusic: {fileID: 802143134}
   typingSound: {fileID: 812698115}
   phoneRingSound: {fileID: 1483595525}
-  textMessage1: {fileID: 608417449}
-  textMessage2: {fileID: 1020095562}
+  textMessage1: {fileID: 1661875514}
+  textMessage2: {fileID: 1005954175}
   textBubble: {fileID: 1578311090}
   thoughtBubble: {fileID: 1150945242}
   thoughtBubbleText: {fileID: 608417447}
   thoughtAsset: {fileID: 1704360177}
-  goToShoppingCenterSign: {fileID: 598882500}
+  goToShoppingCenterSign: {fileID: 212295537}
   spotlight: {fileID: 1951051040}
   roomLight: {fileID: 2041642144}
   shadowSpotlight: {fileID: 326526425}
