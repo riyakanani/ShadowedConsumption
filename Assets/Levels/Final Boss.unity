@@ -20433,6 +20433,7 @@ GameObject:
   - component: {fileID: 1210837147}
   - component: {fileID: 1210837146}
   - component: {fileID: 1210837145}
+  - component: {fileID: 1210837153}
   m_Layer: 0
   m_Name: Player (1)
   m_TagString: Player
@@ -20651,6 +20652,27 @@ Transform:
   - {fileID: 1928795227}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 365, z: 0}
+--- !u!231 &1210837153
+SpringJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210837144}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_BreakAction: 3
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 13.800362
+  m_DampingRatio: 0
+  m_Frequency: 1
 --- !u!1 &1224596411
 GameObject:
   m_ObjectHideFlags: 0
