@@ -10,11 +10,32 @@ public class GlassesPrologueSceneController : MonoBehaviour
     [SerializeField] private List<GameObject> girlTryingOnGlassesFrames;
     [SerializeField] private float frameInterval = 0.5f;
 
+    [Header("Thought Sequences")]
+    public List<GameObject> shadowThoughtCircles; // 3 circles
+    public List<GameObject> shadowThoughtCircles2; // 3 circles
+
+    public List<GameObject> girlThoughtCircles1;
+    public List<GameObject> girlThoughtCircles2;
+    public List<GameObject> shadowMonsterThoughtCircles;
+    public List<GameObject> shadowMonsterThoughtCircles2;
+
+
+    public GameObject shadowThoughtText;
+    public GameObject girlThoughtText1;
+    public GameObject girlThoughtText2;
+    public GameObject shadowMonsterThoughtText;
+
     [Header("Shadow Settings")]
     public GameObject shadow;
     [SerializeField] private List<GameObject> shadowMovementFrames;
+    [SerializeField] private List<GameObject> shadowVillainFrames;
     [SerializeField] private float shadowFrameInterval = 0.5f;
     public float shadowGrowDuration = 2f;
+
+    [Header("Girl Other Animations")]
+    public List<GameObject> girlDraggingFrames;
+    public List<GameObject> girlCuttingFrames;
+    public GameObject girlFightFrame;
 
     [Header("Lighting and Spotlight")]
     public GameObject roomLight;
@@ -30,6 +51,16 @@ public class GlassesPrologueSceneController : MonoBehaviour
 
     [Header("Timing")]
     public float startDelay = 1f;
+
+    [Header("Chair and Girl GameObjects")]
+    public GameObject girl;
+    public GameObject emptyChair;
+
+
+    [Header("Get-Up Animation")]
+    public List<GameObject> girlGetUpFrames;
+    public GameObject shadowThoughtText2;
+
 
     void Start()
     {
@@ -47,41 +78,46 @@ public class GlassesPrologueSceneController : MonoBehaviour
     {
         yield return new WaitForSeconds(startDelay);
 
-        // 1. Play Girl Animation
-        Coroutine glassesAnim = StartCoroutine(PlayGlassesAnimation());
-        yield return glassesAnim;
-
+        yield return StartCoroutine(PlayGlassesAnimation());
         yield return new WaitForSeconds(1f);
 
-        // 2. Grow Shadow
         if (shadow != null)
             yield return StartCoroutine(GrowShadow());
 
         yield return new WaitForSeconds(0.5f);
 
-        // 3. Start Glitch
-        if (glitchOverlay != null) glitchOverlay.SetActive(true);
-        StartCoroutine(CameraGlitchShake(glitchDuration, 0.05f));
-        yield return new WaitForSeconds(glitchDuration);
-
-        if (glitchOverlay != null) glitchOverlay.SetActive(false);
+        yield return StartCoroutine(PlayThoughtSequence(shadowThoughtCircles, shadowThoughtText, "YES YES YES let's go back to the store and buy more"));
+        yield return new WaitForSeconds(0.5f);
+        yield return StartCoroutine(PlayThoughtSequence(girlThoughtCircles1, girlThoughtText1, "No we don't need anything more"));
 
         yield return new WaitForSeconds(0.5f);
+        StartCoroutine(PlayShadowMovementAnimation());
+        StartCoroutine(PlayGirlDraggingAnimation());
 
-        // 4. After glitch, shadow separates/moves
-        if (shadowMovementFrames != null && shadowMovementFrames.Count > 0)
-            yield return StartCoroutine(PlayShadowMovementAnimation());
+        yield return StartCoroutine(PlayThoughtSequence(shadowThoughtCircles2, shadowThoughtText2, "No we are going"));
 
-        yield return new WaitForSeconds(0.5f);
 
-        // 7. Load Boss Scene
+        yield return new WaitForSeconds(3f);
+        yield return StartCoroutine(PlayThoughtSequence(girlThoughtCircles2, girlThoughtText2, "Stop! I've had enough"));
+
+        yield return StartCoroutine(PlayGirlCuttingAnimation());
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine(PlayShadowVillainAnimation());
+
+        yield return StartCoroutine(PlayThoughtSequence(shadowMonsterThoughtCircles, shadowMonsterThoughtText, "Then Let's fight!"));
+
+        yield return StartCoroutine(PlayGirlGetUpAnimation());
+        if (girlGetUpFrames.Count > 0)
+            girlGetUpFrames[girlGetUpFrames.Count - 1].SetActive(false);
+        if (girlFightFrame != null) girlFightFrame.SetActive(true);
+      
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     IEnumerator PlayGlassesAnimation()
     {
-        foreach (var frame in girlTryingOnGlassesFrames)
-            frame.SetActive(false);
+        foreach (var frame in girlTryingOnGlassesFrames) frame.SetActive(false);
 
         for (int i = 0; i < girlTryingOnGlassesFrames.Count; i++)
         {
@@ -93,29 +129,24 @@ public class GlassesPrologueSceneController : MonoBehaviour
 
     IEnumerator GrowShadow()
     {
-        if (shadow == null) yield break;
-
         Vector3 originalScale = shadow.transform.localScale;
         Vector3 targetScale = originalScale * 1.2f;
         Vector3 overshootScale = targetScale * 1.05f;
 
-        float duration = shadowGrowDuration;
         float elapsed = 0f;
 
-        // Phase 1: Grow to Overshoot
-        while (elapsed < duration * 0.5f)
+        while (elapsed < shadowGrowDuration * 0.5f)
         {
             elapsed += Time.deltaTime;
-            shadow.transform.localScale = Vector3.Lerp(originalScale, overshootScale, elapsed / (duration * 0.5f));
+            shadow.transform.localScale = Vector3.Lerp(originalScale, overshootScale, elapsed / (shadowGrowDuration * 0.5f));
             yield return null;
         }
 
-        // Phase 2: Settle Back to Target
         elapsed = 0f;
-        while (elapsed < duration * 0.5f)
+        while (elapsed < shadowGrowDuration * 0.5f)
         {
             elapsed += Time.deltaTime;
-            shadow.transform.localScale = Vector3.Lerp(overshootScale, targetScale, elapsed / (duration * 0.5f));
+            shadow.transform.localScale = Vector3.Lerp(overshootScale, targetScale, elapsed / (shadowGrowDuration * 0.5f));
             yield return null;
         }
 
@@ -125,35 +156,134 @@ public class GlassesPrologueSceneController : MonoBehaviour
     IEnumerator PlayShadowMovementAnimation()
     {
         if (shadow != null)
-            shadow.SetActive(false); // Disable the big original shadow when movement starts
+            shadow.SetActive(false);
 
-        foreach (var frame in shadowMovementFrames)
-            frame.SetActive(false);
+        foreach (var frame in shadowMovementFrames) frame.SetActive(false);
+        foreach (var frame in girlDraggingFrames) frame.SetActive(false);
 
-        for (int i = 0; i < shadowMovementFrames.Count; i++)
+        int count = Mathf.Min(shadowMovementFrames.Count, girlDraggingFrames.Count);
+
+        for (int i = 0; i < count; i++)
         {
+            // Enable current shadow frame
             shadowMovementFrames[i].SetActive(true);
             if (i > 0) shadowMovementFrames[i - 1].SetActive(false);
+
+            // Enable current girl dragging frame
+            girlDraggingFrames[i].SetActive(true);
+            if (i > 0) girlDraggingFrames[i - 1].SetActive(false);
+
+            // Hide chair and original girl on first step
+            if (i == 0)
+            {
+                if (girl != null) girl.SetActive(false);
+                if (emptyChair != null) emptyChair.SetActive(true);
+            }
+
             yield return new WaitForSeconds(shadowFrameInterval);
         }
     }
 
-    IEnumerator CameraGlitchShake(float duration, float magnitude)
+
+
+    IEnumerator PlayGirlDraggingAnimation()
     {
-        Vector3 originalPos = Camera.main.transform.localPosition;
-        float elapsed = 0f;
+        if (girl != null) girl.SetActive(false);
+        if (emptyChair != null) emptyChair.SetActive(true);
 
-        while (elapsed < duration)
+        foreach (var frame in girlDraggingFrames) frame.SetActive(false);
+
+        for (int i = 0; i < girlDraggingFrames.Count; i++)
         {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
+            girlDraggingFrames[i].SetActive(true);
+            if (i > 0) girlDraggingFrames[i - 1].SetActive(false);
+            yield return new WaitForSeconds(frameInterval);
+        }
+    }
 
-            Camera.main.transform.localPosition = new Vector3(x, y, originalPos.z);
+    IEnumerator PlayGirlCuttingAnimation()
+    {
+        // Disable other girl frames (dragging + trying on glasses)
+        foreach (var frame in girlDraggingFrames) frame.SetActive(false);
+        foreach (var frame in girlTryingOnGlassesFrames) frame.SetActive(false);
+        if (girlFightFrame != null) girlFightFrame.SetActive(false);
+        if (girl != null) girl.SetActive(false); // In case original girl GameObject is still active
 
-            elapsed += Time.deltaTime;
-            yield return null;
+        // Enable cutting animation frames one by one
+        foreach (var frame in girlCuttingFrames) frame.SetActive(false);
+
+        for (int i = 0; i < girlCuttingFrames.Count; i++)
+        {
+            girlCuttingFrames[i].SetActive(true);
+            if (i > 0) girlCuttingFrames[i - 1].SetActive(false);
+            yield return new WaitForSeconds(frameInterval);
+        }
+    }
+
+
+    IEnumerator PlayShadowVillainAnimation()
+    {
+        if (shadowMovementFrames.Count > 0)
+            shadowMovementFrames[shadowMovementFrames.Count - 1].SetActive(false);
+
+        foreach (var frame in shadowVillainFrames) frame.SetActive(false);
+
+        for (int i = 0; i < shadowVillainFrames.Count; i++)
+        {
+            shadowVillainFrames[i].SetActive(true);
+            if (i > 0) shadowVillainFrames[i - 1].SetActive(false);
+            yield return new WaitForSeconds(shadowFrameInterval);
         }
 
-        Camera.main.transform.localPosition = originalPos;
+       
     }
+
+    IEnumerator PlayThoughtSequence(List<GameObject> circles, GameObject textBox, string text)
+    {
+        // Disable all bubbles and hide the text initially
+        foreach (var circle in circles) circle.SetActive(false);
+        if (textBox != null)
+        {
+            textBox.SetActive(false);
+            if (textBox.GetComponent<TMPro.TextMeshProUGUI>() != null)
+                textBox.GetComponent<TMPro.TextMeshProUGUI>().text = text;
+        }
+
+        // Show bubbles one by one
+        for (int i = 0; i < circles.Count; i++)
+        {
+            circles[i].SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        // Enable text after all bubbles are shown
+        if (textBox != null)
+            textBox.SetActive(true);
+
+        yield return new WaitForSeconds(1.5f);
+
+        // Hide bubbles and text after the delay
+        foreach (var circle in circles) circle.SetActive(false);
+        if (textBox != null) textBox.SetActive(false);
+    }
+
+    IEnumerator PlayGirlGetUpAnimation()
+    {
+        if (girlCuttingFrames.Count > 0)
+            girlCuttingFrames[girlCuttingFrames.Count - 1].SetActive(false);
+
+        foreach (var frame in girlGetUpFrames) frame.SetActive(false);
+        girlFightFrame?.SetActive(false);
+
+        for (int i = 0; i < girlGetUpFrames.Count; i++)
+        {
+            girlGetUpFrames[i].SetActive(true);
+            if (i > 0) girlGetUpFrames[i - 1].SetActive(false);
+            yield return new WaitForSeconds(frameInterval);
+        }
+
+        
+    }
+
+
 }
