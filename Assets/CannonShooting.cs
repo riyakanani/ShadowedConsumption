@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class cannonShooting : MonoBehaviour
 {
-    public GameObject bulletPrefab;
+    public GameObject[] bulletPrefabs;
+
     public Transform bulletSpawnPoint;
     public float shootingInterval = 2f;
     public float bulletForce = 5f;
@@ -24,22 +25,12 @@ public class cannonShooting : MonoBehaviour
             Shoot();
         }
     }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            Debug.Log("Bullet hit player!");
-            collision.GetComponent<Health>().TakeDamage(damage);
-            Destroy(gameObject);
-        } else if (collision.gameObject.CompareTag("Platform")){
-            Destroy(gameObject);
-        }
-    }
-
     void Shoot()
     {
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+        int randomIndex = Random.Range(0, bulletPrefabs.Length - 1);
+        GameObject selectedBulletPrefab = bulletPrefabs[randomIndex];
+
+        GameObject bullet = Instantiate(selectedBulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         if (rb != null)
@@ -47,5 +38,6 @@ public class cannonShooting : MonoBehaviour
             rb.velocity = shootingDirection.normalized * bulletForce;
         }
     }
+
 
 }

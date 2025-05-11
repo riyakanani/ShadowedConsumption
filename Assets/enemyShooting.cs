@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class enemyShooting : MonoBehaviour
 {
-    public GameObject bullet;
+    public GameObject[] bulletPrefabs;
     public Transform bulletPos;
 
     public Enemy enemy;
@@ -21,30 +21,47 @@ public class enemyShooting : MonoBehaviour
         }
     }
 
-    void shoot(){
-        // Instantiate(bullet, bulletPos.position, Quaternion.identity);
-        GameObject newBullet = Instantiate(bullet, bulletPos.position, Quaternion.identity);
-        // Set the current object as the parent of the instantiated bullet
-        newBullet.transform.SetParent(transform);
+    void shoot()
+    {
+        if (bulletPrefabs.Length == 0)
+        {
+            Debug.LogWarning("No bullet prefabs assigned!");
+            return;
+        }
 
-        // Get the current scale of the enemy
+        // Select a random bullet prefab
+        int randomIndex = Random.Range(0, bulletPrefabs.Length);
+        GameObject selectedBullet = bulletPrefabs[randomIndex];
+
+        // Instantiate the bullet at the specified position
+        GameObject newBullet = Instantiate(selectedBullet, bulletPos.position, Quaternion.identity);
+
+        // Add a Rigidbody2D component if it doesn't already exist
+        Rigidbody2D rb = newBullet.GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            rb = newBullet.AddComponent<Rigidbody2D>();
+            rb.gravityScale = 0; // Optional: Set gravity scale to 0 if you don't want gravity to affect the bullet
+        }
+
+        // Set the bullet's velocity
+        rb.velocity = Vector2.left * 5f; // Adjust the direction and speed as needed
+
+        // Shrink the enemy
         Vector3 currentScale = enemy.transform.localScale;
-
-        // Adjust the scale while maintaining the original sign
         Vector3 newScale = new Vector3(
-            -Mathf.Sign(currentScale.x) * (Mathf.Abs(currentScale.x) - 0.1f),  // Increase X
-            Mathf.Sign(currentScale.y) * (Mathf.Abs(currentScale.y) - 0.1f),  // Decrease Y
-            Mathf.Sign(currentScale.z) * (Mathf.Abs(currentScale.z) - 0.1f)   // Decrease Z
+            -Mathf.Sign(currentScale.x) * (Mathf.Abs(currentScale.x) - 0.1f),
+            Mathf.Sign(currentScale.y) * (Mathf.Abs(currentScale.y) - 0.1f),
+            Mathf.Sign(currentScale.z) * (Mathf.Abs(currentScale.z) - 0.1f)
         );
-
-        // Apply the new scale to the enemy
         enemy.transform.localScale = newScale;
 
         // Check if any scale component is less than 0.5
-        if (Mathf.Abs(newScale.x) < 0.5f || Mathf.Abs(newScale.y) < 0.5f || Mathf.Abs(newScale.z) < 0.5f) {
+        if (Mathf.Abs(newScale.x) < 0.5f || Mathf.Abs(newScale.y) < 0.5f || Mathf.Abs(newScale.z) < 0.5f)
+        {
             Destroy(transform.parent.gameObject); // Destroy the enemy if any scale is below 0.5
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
         }
     }
+
 }

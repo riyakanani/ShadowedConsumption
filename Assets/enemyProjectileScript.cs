@@ -7,7 +7,7 @@ public class enemyProjectileScript : MonoBehaviour
 
     private GameObject player;
     private Rigidbody2D rb;
-    [SerializeField] private float force;
+    [SerializeField] private float force = 10f;
     [SerializeField] private float damage;
 
     private float timer;
