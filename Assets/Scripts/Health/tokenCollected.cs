@@ -16,7 +16,8 @@ public class tokenCollected : MonoBehaviour
 
         if (textElement != null && total > 0)
         {
-            textElement.text = $"{count}/{total} Items";
+            // textElement.text = $"{count}/{total} Items";
+            textElement.text = "";
         }
     }
 
