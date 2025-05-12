@@ -22,6 +22,9 @@ public class Health : MonoBehaviour
     public void TakeDamage(float _damage)
     {
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
+
+        HappinessManager.currentHappiness = Mathf.Max(HappinessManager.currentHappiness - 1f, 0f);
+
         if (currentHealth > 0)
         {
             // Remove anim.SetTrigger("hurt"); 

@@ -9,6 +9,7 @@ public class tokenCollected : MonoBehaviour
     private int total;
     private int count = 0;
     public bool AllCollected => count >= total;
+    public float happinessPerToken = 0.5f;
 
     void Start()
     {
@@ -29,6 +30,9 @@ public class tokenCollected : MonoBehaviour
     public void Increase()
     {
         count++; // Increment count
+
+        HappinessManager.IncreaseWithToken(happinessPerToken);
+
         if (textElement != null)
         {
             textElement.text = count + "/" + total + " Items";

@@ -44,8 +44,19 @@ public class SceneSequenceController : MonoBehaviour
     public GameObject sparklingLines;
     public List<GameObject> clutterObjects;
 
+
+
+    void Awake()
+    {
+        HappinessManager.maxHappiness = 10f;
+        HappinessManager.currentHappiness = 10f;
+    }
+
     void Start()
     {
+        HappinessManager.maxHappiness = 10f;
+        HappinessManager.currentHappiness = 10f;
+
         if (backgroundMusic != null)
         {
             backgroundMusic.loop = true;
@@ -153,6 +164,10 @@ public class SceneSequenceController : MonoBehaviour
         if (roomLight != null) roomLight.SetActive(false);
         if (goToGroceryStoreSign != null) goToGroceryStoreSign.SetActive(true);
         if (spotlightOnGroceryStore != null) spotlightOnGroceryStore.SetActive(true);
+
+        // Decrease happiness for the next platforming level
+        HappinessManager.DecreaseAfterNarrativeScene(2f);
+
     }
 
     IEnumerator PlayGirlPuttingBookDown()
