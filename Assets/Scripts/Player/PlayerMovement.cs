@@ -139,23 +139,36 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        // if (isGrounded())
+        // {
+        //     body.velocity = new Vector2(body.velocity.x, jumpPower);
+        //     anim.SetTrigger("jump");
+        // }
+        // else if (onWall() && !isGrounded())
+        // {
+        //     // Wall jump (only if not sliding anymore)
+        //     float jumpDirection = horizontalInput != 0 ? horizontalInput : 0f;
+        //     body.velocity = new Vector2(jumpDirection * 3f, 20f);
+
+        //     wallJumpCooldown = 0;
+
+        //     if (horizontalInput != 0)
+        //     {
+        //         transform.localScale = new Vector3(Mathf.Sign(horizontalInput), transform.localScale.y, transform.localScale.z);
+        //     }
+        // }
+
         if (isGrounded())
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
             anim.SetTrigger("jump");
         }
-        else if (onWall() && !isGrounded())
+        else if (isWallSliding && wallJumpCooldown > 0.2f)
         {
-            // Wall jump (only if not sliding anymore)
-            float jumpDirection = horizontalInput != 0 ? horizontalInput : 0f;
-            body.velocity = new Vector2(jumpDirection * 3f, 20f);
+            float direction = transform.localScale.x > 0 ? -1 : 1; // Jump away from wall
+            body.velocity = new Vector2(direction * speed, jumpPower);
 
             wallJumpCooldown = 0;
-
-            if (horizontalInput != 0)
-            {
-                // transform.localScale = new Vector3(Mathf.Sign(horizontalInput), transform.localScale.y, transform.localScale.z);
-            }
         }
     }
 
