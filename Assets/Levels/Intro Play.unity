@@ -1031,7 +1031,7 @@ GameObject:
   - component: {fileID: 953286440}
   - component: {fileID: 953286439}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1054,8 +1054,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -25.999998, y: -175}
-  m_SizeDelta: {x: 304.1473, y: 30}
+  m_AnchoredPosition: {x: -157, y: -175}
+  m_SizeDelta: {x: 226.7525, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &953286439
 MonoBehaviour:
@@ -2006,7 +2006,7 @@ GameObject:
   - component: {fileID: 1608779080}
   - component: {fileID: 1608779078}
   m_Layer: 5
-  m_Name: Button
+  m_Name: PlayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2029,7 +2029,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 15, y: -175}
+  m_AnchoredPosition: {x: 11, y: -175}
   m_SizeDelta: {x: 304.1473, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1608779074
@@ -2360,6 +2360,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.82}
+--- !u!1 &1926048292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1926048293}
+  - component: {fileID: 1926048294}
+  m_Layer: 0
+  m_Name: AboutSceneSwitch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1926048293
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926048292}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 379.85236, y: -58.46533, z: 0.3085565}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1926048294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926048292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3b96725397984c7784bf51176d63983, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1941695617
 GameObject:
   m_ObjectHideFlags: 0
@@ -2460,7 +2504,7 @@ GameObject:
   - component: {fileID: 1942244065}
   - component: {fileID: 1942244064}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: About
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2483,7 +2527,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 504, y: -175}
+  m_AnchoredPosition: {x: 602, y: -175}
   m_SizeDelta: {x: 304.1473, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1942244064
@@ -2599,9 +2643,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1942244065}
-        m_TargetAssemblyTypeName: SceneSwitch, Assembly-CSharp
-        m_MethodName: playGame
+      - m_Target: {fileID: 1926048294}
+        m_TargetAssemblyTypeName: MainMenuButtons, Assembly-CSharp
+        m_MethodName: GoToAboutScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2732,3 +2776,4 @@ SceneRoots:
   - {fileID: 1175107442}
   - {fileID: 549487409}
   - {fileID: 236202241}
+  - {fileID: 1926048293}
