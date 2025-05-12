@@ -21,7 +21,10 @@ public class PlayerMovement : MonoBehaviour
     private float wallJumpCooldown;
     private float horizontalInput;
 
+    private bool isWallSliding;
+    private float wallSlidingSpeed;
 
+    // [SerializeField] private Transform wallCheck;
 
     private void Awake()
     {
@@ -50,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
             bool isRunning = Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow);
             anim.SetBool("run", isRunning);
 
-            anim.SetBool("grounded", isGrounded());
+            // anim.SetBool("grounded", isGrounded());
 
             // Flip sprite
             if (horizontalInput > 0.01f)
@@ -76,31 +79,66 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // private void FixedUpdate()
+    // {
+    //     if (!inDialogue())
+    //     {
+    //         if (wallJumpCooldown > 0.2f)
+    //         {
+    //             // Apply movement
+    //             body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
+
+    //             // Handle wall slide
+    //             if (onWall() && !isGrounded())
+    //             {
+    //                 body.gravityScale = 1; // Light gravity for sliding down the wall
+    //                 body.velocity = new Vector2(body.velocity.x, Mathf.Max(body.velocity.y, -3f)); // Limit fall speed
+    //             }
+    //             else
+    //             {
+    //                 body.gravityScale = 5; // Normal gravity
+    //             }
+    //         }
+    //     }
+    // }
+
     private void FixedUpdate()
     {
         if (!inDialogue())
         {
             if (wallJumpCooldown > 0.2f)
             {
-                // Apply movement
-                body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
+                bool pressingIntoWall = (horizontalInput > 0 && transform.localScale.x > 0) || (horizontalInput < 0 && transform.localScale.x < 0);
+                bool wallCondition = onWall() && !isGrounded() && pressingIntoWall;
 
-                // Handle wall slide
-                if (onWall() && !isGrounded())
+                if (wallCondition)
                 {
-                    body.gravityScale = 1; // Light gravity for sliding down the wall
-                    body.velocity = new Vector2(body.velocity.x, Mathf.Max(body.velocity.y, -3f)); // Limit fall speed
+                    // WALL SLIDING
+                    body.velocity = new Vector2(0, Mathf.Max(body.velocity.y, -3f)); // No horizontal movement
+                    body.gravityScale = 1; // Reduced gravity
+                    isWallSliding = true;
                 }
                 else
                 {
+                    // NORMAL MOVEMENT
+                    body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
                     body.gravityScale = 5; // Normal gravity
+                    isWallSliding = false;
                 }
             }
         }
     }
 
+
+
     private void Jump()
     {
+        if (isWallSliding)
+        {
+            // Prevent jumping while sliding
+            return;
+        }
+
         if (isGrounded())
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
@@ -108,31 +146,50 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (onWall() && !isGrounded())
         {
-            // Jump off the wall, only applying horizontal movement if user is pressing left/right
+            // Wall jump (only if not sliding anymore)
             float jumpDirection = horizontalInput != 0 ? horizontalInput : 0f;
             body.velocity = new Vector2(jumpDirection * 3f, 20f);
 
             wallJumpCooldown = 0;
 
-            // Flip sprite based on jump direction
             if (horizontalInput != 0)
             {
-                transform.localScale = new Vector3(Mathf.Sign(horizontalInput), transform.localScale.y, transform.localScale.z);
+                // transform.localScale = new Vector3(Mathf.Sign(horizontalInput), transform.localScale.y, transform.localScale.z);
             }
         }
     }
 
+    
     private bool isGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
         return raycastHit.collider != null;
     }
 
+    // private bool onWall()
+    // {
+    //     RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
+    //     return raycastHit.collider != null;
+    // }
+
     private bool onWall()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
-        return raycastHit.collider != null;
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer | groundLayer);
+        if (hit.collider != null)
+        {
+            // Check for "Platform" tag if it's not in wallLayer
+            if (wallLayer == (wallLayer | (1 << hit.collider.gameObject.layer)))
+            {
+                return true;
+            }
+            else if (hit.collider.CompareTag("Platform"))
+            {
+                return true;
+            }
+        }
+        return false;
     }
+
 
     private bool inDialogue()
     {
