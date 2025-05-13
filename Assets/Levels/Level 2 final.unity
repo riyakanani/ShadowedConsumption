@@ -25625,6 +25625,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 259945893}
     m_Modifications:
+    - target: {fileID: 138872069379859652, guid: d2fe145d7bcaf4f0f9eddd66bbc19136, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -6629797300637803691, guid: e4ac6cfa916704f58b4b2e11de3097d4, type: 3}
+    - target: {fileID: 305205076848941805, guid: d2fe145d7bcaf4f0f9eddd66bbc19136, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -6629797300637803691, guid: e4ac6cfa916704f58b4b2e11de3097d4, type: 3}
+    - target: {fileID: 378765257456487763, guid: d2fe145d7bcaf4f0f9eddd66bbc19136, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -6629797300637803691, guid: e4ac6cfa916704f58b4b2e11de3097d4, type: 3}
     - target: {fileID: 849012974762474445, guid: d2fe145d7bcaf4f0f9eddd66bbc19136, type: 3}
       propertyPath: m_TagString
       value: Untagged
@@ -25697,6 +25709,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 2947157634786123722, guid: d2fe145d7bcaf4f0f9eddd66bbc19136, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -6629797300637803691, guid: e4ac6cfa916704f58b4b2e11de3097d4, type: 3}
     - target: {fileID: 3861670048194809404, guid: d2fe145d7bcaf4f0f9eddd66bbc19136, type: 3}
       propertyPath: m_LocalScale.y
       value: 45.697002
@@ -25726,8 +25742,16 @@ PrefabInstance:
       value: -0.001
       objectReference: {fileID: 0}
     - target: {fileID: 8258041364707140393, guid: d2fe145d7bcaf4f0f9eddd66bbc19136, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8258041364707140393, guid: d2fe145d7bcaf4f0f9eddd66bbc19136, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078778544847257229, guid: d2fe145d7bcaf4f0f9eddd66bbc19136, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9078778544847257229, guid: d2fe145d7bcaf4f0f9eddd66bbc19136, type: 3}
       propertyPath: m_TagString
@@ -31817,7 +31841,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

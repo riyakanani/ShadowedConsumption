@@ -566,6 +566,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   visualTransform: {fileID: 0}
+  startFacingRight: 1
 --- !u!1 &154064850
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,6 +959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  startFacingLeft: 0
   jumpPower: 25
   groundLayer:
     serializedVersion: 2
@@ -1224,6 +1226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
+  startFacingLeft: 0
   jumpPower: 18
   groundLayer:
     serializedVersion: 2
@@ -2785,6 +2788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
+  startFacingLeft: 0
   jumpPower: 15
   groundLayer:
     serializedVersion: 2
@@ -3187,6 +3191,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   visualTransform: {fileID: 0}
+  startFacingRight: 1
 --- !u!1 &1354486646
 GameObject:
   m_ObjectHideFlags: 0
@@ -3739,7 +3744,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
