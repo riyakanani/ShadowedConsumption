@@ -2568,32 +2568,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7c060a099df34ed5ab35b556aa488a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openBook: {fileID: 1101606799}
-  closedBook: {fileID: 1564999279}
-  phoneInHand: {fileID: 1454660591}
+  girlBookReadingFrames: []
+  readingFrameInterval: 0.5
+  backgroundMusic: {fileID: 0}
+  shadowArmsReaching: {fileID: 0}
+  shadow: {fileID: 0}
   pageTurningSound: {fileID: 391329649}
   phoneRingSound: {fileID: 771279061}
   textMessage1: {fileID: 847238973}
   textMessage2: {fileID: 1478129865}
   textBubble: {fileID: 1441215054}
+  Circle: {fileID: 0}
+  X: {fileID: 0}
   goToGroceryStoreSign: {fileID: 1813349177}
   spotlightOnGroceryStore: {fileID: 1233009192}
   shadowSpotlight: {fileID: 439773712}
   roomLight: {fileID: 1643089030}
-  happinessBar: {fileID: 1490702208}
-  girlAnimator: {fileID: 1012581763}
+  happinessBar: {fileID: 0}
+  girlBookFrames: []
+  frameInterval: 1
   thoughtBubble: {fileID: 1827823452}
+  thoughtBubbleText: {fileID: 0}
+  secondThoughtText: {fileID: 0}
   chipsAsset: {fileID: 1405241021}
-  thoughtBubbleText: {fileID: 1647182809}
-  chipsText: {fileID: 579189451}
-  oldShadowFace: {fileID: 1885308154}
-  newShadowFace: {fileID: 1345473428}
-  shadowAnimator: {fileID: 0}
-  shadowArmAnimator: {fileID: 1580775110}
-  headAnimator: {fileID: 0}
+  chipsText: {fileID: 0}
   circle1: {fileID: 1982468953}
   circle2: {fileID: 877547298}
+  shadowCircle1: {fileID: 0}
+  shadowCircle2: {fileID: 0}
+  shadowThoughtBubble: {fileID: 0}
+  shadowThoughtText1: {fileID: 0}
+  shadowThoughtText2: {fileID: 0}
   sparklingLines: {fileID: 1106131484}
+  clutterObjects: []
 --- !u!4 &451360651
 Transform:
   m_ObjectHideFlags: 0
@@ -3311,7 +3318,7 @@ MonoBehaviour:
   characterSprite: {fileID: 21300000, guid: c0210b4487f944b11979d8f447d9739b, type: 3}
   imageHolder: {fileID: 2121234718}
   actionObject: {fileID: 0}
-  hatTransfer: {fileID: 0}
+  xButton: {fileID: 0}
 --- !u!114 &557235064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4627,7 +4634,7 @@ MonoBehaviour:
   characterSprite: {fileID: 21300000, guid: 705b568c9805b47f2b597fe1a4d18d06, type: 3}
   imageHolder: {fileID: 1220020571}
   actionObject: {fileID: 0}
-  hatTransfer: {fileID: 0}
+  xButton: {fileID: 0}
 --- !u!114 &780934272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5170,7 +5177,7 @@ MonoBehaviour:
   characterSprite: {fileID: 21300000, guid: c0210b4487f944b11979d8f447d9739b, type: 3}
   imageHolder: {fileID: 504534573}
   actionObject: {fileID: 0}
-  hatTransfer: {fileID: 1138847048}
+  xButton: {fileID: 0}
 --- !u!114 &849195890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7196,7 +7203,7 @@ MonoBehaviour:
   characterSprite: {fileID: 21300000, guid: c0210b4487f944b11979d8f447d9739b, type: 3}
   imageHolder: {fileID: 702372766}
   actionObject: {fileID: 0}
-  hatTransfer: {fileID: 0}
+  xButton: {fileID: 0}
 --- !u!114 &1073543563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12586,7 +12593,7 @@ MonoBehaviour:
   characterSprite: {fileID: 21300000, guid: 705b568c9805b47f2b597fe1a4d18d06, type: 3}
   imageHolder: {fileID: 660790083}
   actionObject: {fileID: 0}
-  hatTransfer: {fileID: 0}
+  xButton: {fileID: 0}
 --- !u!114 &1664338145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12862,7 +12869,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f9a7a21a4b57c4d89bfca20a1fe54ab6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 26cc0025c7c3b42cb951c6707255ca06, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -13552,7 +13559,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7eab290c6464364a9bb171123f253b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: NeighborhoodScene
 --- !u!61 &1813349179
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14573,7 +14579,7 @@ MonoBehaviour:
   characterSprite: {fileID: 21300000, guid: 705b568c9805b47f2b597fe1a4d18d06, type: 3}
   imageHolder: {fileID: 124220696}
   actionObject: {fileID: 0}
-  hatTransfer: {fileID: 0}
+  xButton: {fileID: 0}
 --- !u!114 &1877030512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14932,7 +14938,7 @@ MonoBehaviour:
   characterSprite: {fileID: 21300000, guid: c0210b4487f944b11979d8f447d9739b, type: 3}
   imageHolder: {fileID: 1720838719}
   actionObject: {fileID: 0}
-  hatTransfer: {fileID: 0}
+  xButton: {fileID: 0}
 --- !u!114 &1927809164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15165,7 +15171,7 @@ MonoBehaviour:
   characterSprite: {fileID: 21300000, guid: 705b568c9805b47f2b597fe1a4d18d06, type: 3}
   imageHolder: {fileID: 979867302}
   actionObject: {fileID: 0}
-  hatTransfer: {fileID: 0}
+  xButton: {fileID: 0}
 --- !u!114 &1959139940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15321,7 +15327,7 @@ MonoBehaviour:
   characterSprite: {fileID: 21300000, guid: c0210b4487f944b11979d8f447d9739b, type: 3}
   imageHolder: {fileID: 748913080}
   actionObject: {fileID: 0}
-  hatTransfer: {fileID: 0}
+  xButton: {fileID: 0}
 --- !u!114 &1959464214
 MonoBehaviour:
   m_ObjectHideFlags: 0

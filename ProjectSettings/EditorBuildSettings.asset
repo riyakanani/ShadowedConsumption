@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Levels/Intro Play.unity
     guid: 2c09c9a7465d542ce9278c8736132be1
   - enabled: 1
+    path: Assets/Levels/How To Scene.unity
+    guid: c2d77936fcb9344d69ca0023352620df
+  - enabled: 1
+    path: Assets/Levels/About.unity
+    guid: a2f64ec071b75450db4b71196133234d
+  - enabled: 1
     path: Assets/Levels/Prologue 1.2.unity
     guid: db9971350c9114313b90f56db0d75bea
   - enabled: 1
