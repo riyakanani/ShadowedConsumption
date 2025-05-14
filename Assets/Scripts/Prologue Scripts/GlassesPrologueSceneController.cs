@@ -18,6 +18,8 @@ public class GlassesPrologueSceneController : MonoBehaviour
     public List<GameObject> shadowThoughtCircles; // 3 circles
     public List<GameObject> shadowThoughtCircles2; // 3 circles
     public List<GameObject> shadowThoughtCircles3; // 3 circles
+    public List<GameObject> shadowThoughtCircles4;
+
 
     [Header("Lighting Switch and Background")]
     public GameObject lightSwitchOff;
@@ -33,6 +35,8 @@ public class GlassesPrologueSceneController : MonoBehaviour
 
     public GameObject shadowThoughtText;
     public GameObject shadowThoughtText3;
+    public GameObject shadowThoughtText4;
+
 
     public GameObject girlThoughtText1;
     public GameObject girlThoughtText2;
@@ -103,7 +107,7 @@ public class GlassesPrologueSceneController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(PlayThoughtSequence(girlThoughtCircles1, girlThoughtText1, "No we don't need anything more"));
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         StartCoroutine(PlayShadowMovementAnimation());
         StartCoroutine(PlayGirlDraggingAnimation());
 
@@ -113,6 +117,11 @@ public class GlassesPrologueSceneController : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
         yield return StartCoroutine(PlayThoughtSequence(girlThoughtCircles2, girlThoughtText2, "Stop! I've had enough"));
+        yield return new WaitForSeconds(0.5f);
+
+
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine(PlayThoughtSequence(shadowThoughtCircles4, shadowThoughtText4, "There is never enough! Nothing is ever enough!"));
 
         yield return StartCoroutine(PlayGirlCuttingAnimation());
         yield return new WaitForSeconds(1f);
@@ -183,17 +192,20 @@ public class GlassesPrologueSceneController : MonoBehaviour
 
         int count = Mathf.Min(shadowMovementFrames.Count, girlDraggingFrames.Count);
 
+        // Optional: hide girl and show empty chair at start
+        if (girl != null) girl.SetActive(false);
+        if (emptyChair != null) emptyChair.SetActive(true);
+
         for (int i = 0; i < count; i++)
         {
-            // Enable current shadow frame
+            // SHADOW moves first
             shadowMovementFrames[i].SetActive(true);
             if (i > 0) shadowMovementFrames[i - 1].SetActive(false);
 
-            // Enable current girl dragging frame
-            girlDraggingFrames[i].SetActive(true);
-            if (i > 0) girlDraggingFrames[i - 1].SetActive(false);
+            // Delay before girl starts moving to simulate drag
+            StartCoroutine(DelayedGirlFrame(i));
 
-            // Hide chair and original girl on first step
+            // Chair stuff only once
             if (i == 0)
             {
                 if (girl != null) girl.SetActive(false);
@@ -204,6 +216,36 @@ public class GlassesPrologueSceneController : MonoBehaviour
         }
     }
 
+    //IEnumerator PlayShadowMovementAnimation()
+    //{
+    //    if (shadow != null)
+    //        shadow.SetActive(false);
+
+    //    foreach (var frame in shadowMovementFrames) frame.SetActive(false);
+    //    foreach (var frame in girlDraggingFrames) frame.SetActive(false);
+
+    //    int count = Mathf.Min(shadowMovementFrames.Count, girlDraggingFrames.Count);
+
+    //    for (int i = 0; i < count; i++)
+    //    {
+    //        // Enable current shadow frame
+    //        shadowMovementFrames[i].SetActive(true);
+    //        if (i > 0) shadowMovementFrames[i - 1].SetActive(false);
+
+    //        // Enable current girl dragging frame
+    //        girlDraggingFrames[i].SetActive(true);
+    //        if (i > 0) girlDraggingFrames[i - 1].SetActive(false);
+
+    //        // Hide chair and original girl on first step
+    //        if (i == 0)
+    //        {
+    //            if (girl != null) girl.SetActive(false);
+    //            if (emptyChair != null) emptyChair.SetActive(true);
+    //        }
+
+    //        yield return new WaitForSeconds(shadowFrameInterval);
+    //    }
+    //}
 
 
     IEnumerator PlayGirlDraggingAnimation()
@@ -323,6 +365,34 @@ public class GlassesPrologueSceneController : MonoBehaviour
 
         
     }
+
+    //IEnumerator DelayedGirlFrame(int index)
+    //{
+    //    yield return new WaitForSeconds(0.1f); // small delay to simulate drag
+
+    //    if (index < girlDraggingFrames.Count)
+    //    {
+    //        girlDraggingFrames[index].SetActive(true);
+    //        if (index > 0)
+    //            girlDraggingFrames[index - 1].SetActive(false);
+    //    }
+    //}
+
+    IEnumerator DelayedGirlFrame(int index)
+    {
+        // Skip delay for the very last frame to keep things in sync
+        if (index < girlDraggingFrames.Count - 1)
+            yield return new WaitForSeconds(0.1f);
+
+        if (index < girlDraggingFrames.Count)
+        {
+            girlDraggingFrames[index].SetActive(true);
+            if (index > 0)
+                girlDraggingFrames[index - 1].SetActive(false);
+        }
+    }
+
+
 
 
 }
