@@ -378,19 +378,48 @@ public class GlassesPrologueSceneController : MonoBehaviour
     //    }
     //}
 
+    //IEnumerator DelayedGirlFrame(int index)
+    //{
+    //    // Skip delay for the very last frame to keep things in sync
+    //    if (index < girlDraggingFrames.Count - 1)
+    //        yield return new WaitForSeconds(0.2f); // was 0.1f
+
+
+    //    if (index < girlDraggingFrames.Count)
+    //    {
+    //        girlDraggingFrames[index].SetActive(true);
+    //        if (index > 0)
+    //            girlDraggingFrames[index - 1].SetActive(false);
+    //    }
+    //}
+
     IEnumerator DelayedGirlFrame(int index)
     {
-        // Skip delay for the very last frame to keep things in sync
-        if (index < girlDraggingFrames.Count - 1)
-            yield return new WaitForSeconds(0.1f);
-
         if (index < girlDraggingFrames.Count)
         {
-            girlDraggingFrames[index].SetActive(true);
-            if (index > 0)
-                girlDraggingFrames[index - 1].SetActive(false);
+            var girlObj = girlDraggingFrames[index];
+            girlObj.SetActive(true);
+            if (index > 0) girlDraggingFrames[index - 1].SetActive(false);
+
+            Vector3 originalPos = girlObj.transform.localPosition;
+            Vector3 dragBackPos = originalPos + new Vector3(-0.1f, 0, 0); // back slightly
+
+            girlObj.transform.localPosition = dragBackPos;
+
+            
+            float duration = 0.2f;
+            float t = 0f;
+            while (t < duration)
+            {
+                girlObj.transform.localPosition = Vector3.Lerp(dragBackPos, originalPos, t / duration);
+                t += Time.deltaTime;
+                yield return null;
+            }
+
+            girlObj.transform.localPosition = originalPos;
         }
     }
+
 
 
 
