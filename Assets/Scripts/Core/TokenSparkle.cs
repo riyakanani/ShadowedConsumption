@@ -24,7 +24,7 @@ public class TokenSparkle : MonoBehaviour
             }
 
             // Destroy the token after a delay to let the sparkles finish
-            Destroy(gameObject, 0.5f);
+            // Destroy(gameObject, 0.5f);
         }
     }
 }
