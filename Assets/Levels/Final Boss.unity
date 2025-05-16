@@ -6870,7 +6870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAACYn+te+QNifAIAADYFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1zmzAQ/SsenWsP+AvTW0scp4cknridXLjIaDEaC4mRRGwn4//elQBDXS6W39uP91YLX4RLU0Fmld5ozp4VA/J9RNyZfBv15BOc6UHJHf+ELuadM1u4IOpj3qjlCvHQpRlVgtU8+yEPwgUHCNaS50qXa3aARBlrEM6pMICUVtZlS4S+RuSMP+PYpVzwNI3c6RNPcTC64jEDaUEPQmeTWYzPKozblHE0iQL3TOM2dTWJ50G0nC3C9ThY+TK1zAQtK2DOU19tOWuLzCIfJtFtG+GcZUoIblqpxF4qP4qEVqZGoxjAOEXrXl84cbUK4IfCOiPD9Nc8N2DbyWh6eeAaZ9jUJT9VM9iSmmOj7IOK2nVarOZeVVP0+T9+HHo616p86vqGgethC54d3+glo8YOJj+EHwbS/YBOVBzpXsB7AfJFbbSqJUPS6tql1gamD/3fm7WkgOzY443UO7Cu+ol3F91ds/Nw9e7PieDl3lGTeQPshPIT99sBGu/mFwr2u2PaEog6FX8M/KaH4ZK1xCPXxiLVupRO3l7V2oWStZ+Zc1PbRGkJHm5FVyCpsJctlrH3V3jHDdreMY/UvU5t85br3pK7FA/38UFwR23V6XZZplCnZzDFa20Fl9CLdsQLzilRUjYbNpxJl7ardU6zQdqh5uzf1SJsEQXLebiECIJ9sMrHAaP5KpwGUbzI98ECiN89LtEnFdtGaDsevDXZF5e4Z91XZrTRtPLbzjQ9bfhnqYYCuczVLtMA8rUpcVMOGrvgi8nWjOOEdmAtl/7CyVdKhMqOwNJbz9RbXZ+tpmlfJSUV/1DWISlJ/HclJQ6+LfNWwweHk2veFbuS619QSwMEFAAACAgAAJif61b9J8dtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTXUVBKL0osyCgGihiCOKWZKSB2tFKKqbmBmYmhWap5qkGSgUWarkFKYpqFoZGBuaVpWpKBaapSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAJif6175A2J8AgAANgUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAJif61b9J8dtAAAAeAAAAAkAJAAAAAAAAAAAAAAAyQIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAACBAwAAAAA=
+    dataString: UEsDBBQAAAgIAACYn+vuhw1uawIAACAFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMzoWRCZ+9tQ4hPZAwoZ1cfBHWGmuQJY8kB0iG/96VbGOXnhDv7cfbp5W/iFC2hNRpszaCbzQH8n1A/Jl8G3TkM5zZQaud+IQ25l1wl/sgFmLemBMa8cinWV2AMyL9oQ7SB1MEKyUybYoVP0CsrbMIZ0xaQMpo57MVQl8Dcsaf4dKnXPA0nvvTJ56WdHDFYwrKgelCo4fRNKKURuMm42E0mTcpdUalUsmKEriX3yUuZm2LZQhTOFgT4YdItZTCNqqIu5Rh6piVtsKZMIALhlMGKdHoAYEcxCF3vmA//TXLLLjGBMMuj8KgXXVd8lPXHhbMHmtlH0xWvtN0MQmq6qKb//hhFOjM6OK57Ys2IORykR7f2CVl1vVM7sOPPenBoBOTR7aX8J6DetFroyvFkXSm8qmVhfFj9/c2WpxDeuzwWuodWJWd4+2dtjfqZ7iG6c+xFMXeU6NJDeykDo6HRQCDd/MLBYc1sU0JRL2KPxZ+s0N/nxriSRjrkGqmVF7eXlfGh5JV8MxPU7lYGwUBbkSXoJh0ly2WcfdXeMf12t4xT8y/nKZ5w7UP4i4lwF08pXfUVp9ul2VzfdqAzV8rJ4WCTrQnXtCnWCtVb1jfkzZtV5mMpb20QyX4v6tF+HROZ5NoBnOge7rIhpSzbBGN6Xw5zfZ0CiTsnlA4J5PbWmhjD96a6oor3LP2gzJYG1aGbeeGndbis9A9y4XK9C41AOq1rnATDgab4LvkKy7QoB04J1S4b/KVEKnTI/DkVigJk67OzrCkq5KQUnxo55GExOELkhAP33Z5a+BDwMk3b4tdyfUvUEsDBBQAAAgIAACYn+tW/SfHbQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM011FQSi9KLMgoBooYgjilmSkgdrRSiqm5gZmJoVmqeapBkoFFmq5BSmKahaGRgbmlaVqSgWmqUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAACYn+vuhw1uawIAACAFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAACYn+tW/SfHbQAAAHgAAAAJACQAAAAAAAAAAAAAALgCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAcAMAAAAA
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -27363,6 +27363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 967918411}
   - component: {fileID: 967918412}
+  - component: {fileID: 967918413}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -27406,6 +27407,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalhealthBar: {fileID: 2051302674}
   currenthealthBar: {fileID: 899760980}
+--- !u!328 &967918413
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967918410}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: d0a4d8664ff1f42ef81cdbf265e87dc7, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1 &969589594
 GameObject:
   m_ObjectHideFlags: 0
@@ -67684,6 +67719,7 @@ GameObject:
   - component: {fileID: 1976227014}
   - component: {fileID: 1976227019}
   - component: {fileID: 1976227018}
+  - component: {fileID: 1976227020}
   m_Layer: 5
   m_Name: UICanvas (1)
   m_TagString: Untagged
@@ -67815,6 +67851,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976227013}
   m_CullTransparentMesh: 1
+--- !u!328 &1976227020
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976227013}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: d0a4d8664ff1f42ef81cdbf265e87dc7, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1 &1983790761
 GameObject:
   m_ObjectHideFlags: 0
