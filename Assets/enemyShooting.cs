@@ -12,6 +12,16 @@ public class enemyShooting : MonoBehaviour
 
     private float timer;
 
+    private Health playerHealth;
+
+    void Start(){
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerHealth = player.GetComponent<Health>();
+        }
+    }
+
     void Update(){
         timer += Time.deltaTime;
 
@@ -28,6 +38,7 @@ public class enemyShooting : MonoBehaviour
             Debug.LogWarning("No bullet prefabs assigned!");
             return;
         }
+        playerHealth.AddHealth(.1f);
 
         // Select a random bullet prefab
         int randomIndex = Random.Range(0, bulletPrefabs.Length);
@@ -55,6 +66,7 @@ public class enemyShooting : MonoBehaviour
             Mathf.Sign(currentScale.z) * (Mathf.Abs(currentScale.z) - 0.1f)
         );
         enemy.transform.localScale = newScale;
+
 
         // Check if any scale component is less than 0.5
         if (Mathf.Abs(newScale.x) < 0.5f || Mathf.Abs(newScale.y) < 0.5f || Mathf.Abs(newScale.z) < 0.5f)

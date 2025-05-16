@@ -78,9 +78,16 @@ public class GlassesPrologueSceneController : MonoBehaviour
     public List<GameObject> girlGetUpFrames;
     public GameObject shadowThoughtText2;
 
+    private Health playerHealth;
+
 
     void Start()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerHealth = player.GetComponent<Health>();
+        }
         if (glitchOverlay != null) glitchOverlay.SetActive(false);
         if (fadePanel != null) fadePanel.color = new Color(0, 0, 0, 0);
 
@@ -104,15 +111,18 @@ public class GlassesPrologueSceneController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         yield return StartCoroutine(PlayThoughtSequence(shadowThoughtCircles, shadowThoughtText, "YES YES YES let's go back to the store and buy more"));
+        playerHealth.TakeDamage(.1f);
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(PlayThoughtSequence(girlThoughtCircles1, girlThoughtText1, "No we don't need anything more"));
 
         yield return new WaitForSeconds(1f);
         StartCoroutine(PlayShadowMovementAnimation());
         StartCoroutine(PlayGirlDraggingAnimation());
+       
 
         yield return new WaitForSeconds(1f);
         yield return StartCoroutine(PlayThoughtSequence(shadowThoughtCircles2, shadowThoughtText2, "No we are going"));
+        playerHealth.TakeDamage(.1f);
 
 
         yield return new WaitForSeconds(3f);
@@ -122,7 +132,7 @@ public class GlassesPrologueSceneController : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         yield return StartCoroutine(PlayThoughtSequence(shadowThoughtCircles4, shadowThoughtText4, "There is never enough! Nothing is ever enough!"));
-
+        playerHealth.TakeDamage(.1f);
         yield return StartCoroutine(PlayGirlCuttingAnimation());
         yield return new WaitForSeconds(1f);
 

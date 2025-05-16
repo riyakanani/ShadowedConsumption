@@ -73,7 +73,8 @@ public class HealthbarPlatforming : MonoBehaviour
 
     void Update()
     {
-        // Continuously reflect current happiness
-        currenthealthBar.fillAmount = HappinessManager.currentHappiness / 10f;
+        float fill = HappinessManager.currentHappiness / 10f;
+        currenthealthBar.fillAmount = Mathf.Max(fill, 0.2f);
     }
+
 }

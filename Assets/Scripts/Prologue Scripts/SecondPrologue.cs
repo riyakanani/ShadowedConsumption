@@ -45,10 +45,16 @@ public class SecondPrologue : MonoBehaviour
     public GameObject shadowCircle3;
     public GameObject morphedShadow;
     public GameObject thoughtBubbleTextTwo;
+    private Health playerHealth;
 
     void Start()
     {
         Debug.Log("SecondPrologue: Start() called.");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerHealth = player.GetComponent<Health>();
+        }
 
         if (backgroundMusic != null)
         {
@@ -153,6 +159,7 @@ public class SecondPrologue : MonoBehaviour
         yield return shadowBubbleSequence;
 
         Debug.Log("Shadow thought sequence complete.");
+        playerHealth.TakeDamage(.1f);
 
         yield return new WaitForSeconds(2f);
 
@@ -175,7 +182,7 @@ public class SecondPrologue : MonoBehaviour
             yield return StartCoroutine(GrowShadow());
 
         Debug.Log("Shadow growth complete.");
-
+        playerHealth.TakeDamage(.1f);
         HideThoughtBubbleAndText();
         thoughtAsset?.SetActive(false);
         circle1?.SetActive(false);

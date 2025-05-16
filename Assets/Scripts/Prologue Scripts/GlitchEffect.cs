@@ -43,6 +43,7 @@ public class SceneSequenceController : MonoBehaviour
 
     public GameObject sparklingLines;
     public List<GameObject> clutterObjects;
+    private Health playerHealth;
 
 
 
@@ -50,6 +51,12 @@ public class SceneSequenceController : MonoBehaviour
     {
         HappinessManager.maxHappiness = 10f;
         HappinessManager.currentHappiness = 10f;
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerHealth = player.GetComponent<Health>();
+        }
     }
 
     void Start()
@@ -141,7 +148,7 @@ public class SceneSequenceController : MonoBehaviour
         ShowShadowSecondCircle();
         yield return new WaitForSeconds(0.5f);
         yield return StartCoroutine(ShowShadowThoughtSequence());
-
+        playerHealth.TakeDamage(.1f);
         // Chips scene
         ShowFirstCircle();
         yield return new WaitForSeconds(0.5f);
@@ -264,7 +271,7 @@ public class SceneSequenceController : MonoBehaviour
             Vector3 targetScale = originalScale * 1.5f;
             float duration = 2f;
             float elapsed = 0f;
-
+            playerHealth.TakeDamage(.1f);
             while (elapsed < duration)
             {
                 shadow.transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsed / duration);

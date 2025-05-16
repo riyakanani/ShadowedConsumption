@@ -42,7 +42,7 @@ public class FinalPrologueSceneController : MonoBehaviour
     public GameObject shadowCircle3;
     public GameObject morphedShadow;
 
-
+    private Health playerHealth;
 
     void Start()
     {
@@ -58,6 +58,11 @@ public class FinalPrologueSceneController : MonoBehaviour
         happinessBar?.SetActive(true);
 
         StartCoroutine(PlayFinalPrologueSequence());
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerHealth = player.GetComponent<Health>();
+        }
     }
 
     IEnumerator PlayFinalPrologueSequence()
@@ -164,6 +169,7 @@ public class FinalPrologueSceneController : MonoBehaviour
         {
             shadowThoughtText.text = "No Let's get more stuff...";
             shadowThoughtText.gameObject.SetActive(true);
+            playerHealth.TakeDamage(.1f);
         }
     }
 
